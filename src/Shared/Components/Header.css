@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    padding: 1.5rem 4rem 1.5rem 8rem;
+
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.nav-list {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-evenly;
+    list-style: none;
+    gap: 3rem;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #F6E9E9;
+    font: 1em sans-serif;
+
+}
+
+.nav-brand {
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.nav-line {
+    display: flex;
+}

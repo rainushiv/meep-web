@@ -1,0 +1,22 @@
+.card-Container {
+
+    width: 90%;
+    height: 80px;
+    margin: auto;
+    background-color: #272121;
+    border-radius: 15px;
+}
+
+.card-Content {
+
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.card-Title {
+
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}

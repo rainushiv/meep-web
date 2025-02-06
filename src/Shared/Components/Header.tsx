@@ -1,0 +1,46 @@
+import { Link } from "react-router-dom"
+import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import './Header.css'
+import Divider from '@mui/joy/Divider';
+
+
+
+export default function Header() {
+
+    const isLogin = useStoreAuth((state) => state.isLogin);
+
+    return (
+        <>
+            <nav className="nav-container">
+
+                <Link className='nav-brand' to={'/home'}>Mimi</Link>
+
+
+                <ul className='nav-list'>
+
+                    <li>
+                        <Link to={'/meeps'}>Meeps</Link>
+
+                    </li>
+                    {isLogin ?
+                        <li>
+                            <Link to={'/user'}>Profile</Link>
+
+                        </li>
+                        :
+                        <li>
+                            <Link to={'/auth'}>Login/Signup</Link>
+
+                        </li>
+
+
+                    }
+
+
+
+                </ul>
+            </nav>
+            <Divider></Divider>
+        </>
+    )
+}

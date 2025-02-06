@@ -1,0 +1,12 @@
+.auth-container {
+
+    margin-top: 50px;
+    max-width: fit-content;
+    margin-inline: auto;
+
+}
+
+.button-container {
+    display: flex;
+    gap: 2rem;
+}

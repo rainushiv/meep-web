@@ -1,0 +1,20 @@
+.usermeep-Container {
+    width: 400px;
+    max-width: 400px;
+    word-wrap: break-word;
+    min-height: 75px;
+    height: auto;
+    padding: 10px;
+    background-color: #272121;
+    border-radius: 10px;
+}
+
+.title-container {
+    display: flex;
+    gap: 5px;
+
+}
+
+.body-container {
+    padding-left: 37px;
+}
