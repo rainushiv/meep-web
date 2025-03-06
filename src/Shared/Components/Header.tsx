@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import './Header.css'
 import Divider from '@mui/joy/Divider';
+import SearchBox from "./SearchBox";
 
 
 
@@ -14,14 +15,10 @@ export default function Header() {
             <nav className="nav-container">
 
                 <Link className='nav-brand' to={'/home'}>Mimi</Link>
-
+                <SearchBox></SearchBox>
 
                 <ul className='nav-list'>
 
-                    <li>
-                        <Link to={'/meeps'}>Meeps</Link>
-
-                    </li>
                     {isLogin ?
                         <li>
                             <Link to={'/user'}>Profile</Link>
