@@ -2,10 +2,10 @@
     color: white;
 }
 
-.meep-Container {
+.homemeep-Container {
     margin-top: 50px;
     max-width: fit-content;
-    margin-left: auto;
+    margin-left: 90px;
     margin-right: auto;
     margin-bottom: 80px;
 }

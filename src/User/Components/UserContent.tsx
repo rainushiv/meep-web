@@ -121,46 +121,48 @@ export default function UserContent({ propId }: propId) {
                     {currentUser && currentUser.username}
 
                 </div>
-                {
-                    isOpenFollower &&
-                    <div className="darkBG" onClick={() => { setIsOpenFollower(false) }}>
-                        <div className="centered">
-                            <div className="modal">
-                                <div className="modalHeader">
-                                    <div className="heading">
-                                        <div>Followers</div>
-                                        <Divider></Divider>
-                                    </div>
-                                </div>
-                                {currentUserFollowers && <MapFollow follows={currentUserFollowers}></MapFollow>}
-                            </div>
-                        </div>
-
-                    </div>
-                }
-                {
-                    isOpenFollowing &&
-                    <div className="darkBG" onClick={() => { setIsOpenFollowing(false) }}>
-                        <div className="centered">
-
-                            <div className="modal">
-                                <div className="modalHeader">
-                                    <div className="heading">
-                                        <div>Following</div>
-                                        <Divider></Divider>
-                                    </div>
-                                </div>
-                                {currentUserFollowing && <MapFollowing follows={currentUserFollowing}></MapFollowing>}
-                            </div>
-                        </div>
-                    </div>
-                }
                 <button onClick={() => { setIsOpenFollower(true) }}>Followers</button>
                 <button onClick={() => { setIsOpenFollowing(true) }}>Following</button>
-                {!(propId === "") && <FollowButton currentId={currentId}></FollowButton>
-                }
+
+                {!(propId === "") && <FollowButton currentId={currentId}></FollowButton>}
 
             </div>
+
+            {
+                isOpenFollower &&
+                <div className="darkBG" onClick={() => { setIsOpenFollower(false) }}>
+                    <div className="centered">
+                        <div className="modal">
+                            <div className="modalHeader">
+                                <div className="heading">
+                                    <div>Followers</div>
+                                    <Divider></Divider>
+                                </div>
+                            </div>
+                            {currentUserFollowers && <MapFollow follows={currentUserFollowers}></MapFollow>}
+                        </div>
+                    </div>
+
+                </div>
+            }
+            {
+                isOpenFollowing &&
+                <div className="darkBG" onClick={() => { setIsOpenFollowing(false) }}>
+                    <div className="centered">
+
+                        <div className="modal">
+                            <div className="modalHeader">
+                                <div className="heading">
+                                    <div>Following</div>
+                                    <Divider></Divider>
+                                </div>
+                            </div>
+                            {currentUserFollowing && <MapFollowing follows={currentUserFollowing}></MapFollowing>}
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div>
                 <ul>
 

@@ -5,6 +5,7 @@
     margin: auto;
     background-color: #272121;
     border-radius: 15px;
+    z-index: 0;
 }
 
 .card-Content {

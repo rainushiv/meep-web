@@ -6,6 +6,7 @@ import HomeMeepContent from '../Components/HomeMeepContent';
 import HomeUserContent from '../Components/HomeUserContent';
 import { useStoreAuth } from '../../Auth/Components/AuthStore';
 import { useEffect, useState } from 'react';
+import SideBar from '../../Shared/Components/SideBar';
 
 
 
@@ -48,6 +49,7 @@ export default function Home() {
     console.log("here" + users)
     return (
         <>
+            <SideBar></SideBar>
             <Header />
             {!isLoading && users && <HomeUserContent user={users}></HomeUserContent>}
             <Divider />

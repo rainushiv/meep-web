@@ -1,6 +1,7 @@
 import Button from "@mui/joy/Button/Button";
 import { useState, useEffect } from "react";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import "./FollowButton.css"
 type followingInfo = {
 
     currentId: string | number | null,
@@ -65,7 +66,7 @@ export default function FollowButton({ currentId }: followingInfo) {
 
     return (
         <>
-            {isFollowing ? <Button>following</Button> : <Button onClick={followUserHandler}>follow</Button>}
+            {isFollowing ? <Button className="follow-button">following</Button> : <Button className="follow-button" onClick={followUserHandler}>follow</Button>}
 
 
         </>

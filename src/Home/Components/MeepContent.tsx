@@ -22,7 +22,7 @@ export default function MeepContent() {
                 },
                 body: JSON.stringify({
 
-                    title: title,
+                    title: null,
                     body: subject,
                     creatorId: Id
                 })
@@ -37,18 +37,11 @@ export default function MeepContent() {
     return (
         <div className='meep-Container'>
             <form onSubmit={submitHandler}>
-                <div className='title-Container'>
 
-                    <Input placeholder='Title' value={title} onChange={(e) => { setTitle(e.target.value) }}></Input>
-                </div>
-                <div className='input-Container'>
 
-                    <Textarea className='textArea' minRows={4} value={subject} placeholder='Subject' onChange={(e) => { setSubject(e.target.value) }}></Textarea>
+                <input className='inputArea' value={subject} placeholder='Whats on your mind...' onChange={(e) => { setSubject(e.target.value) }}></input>
 
-                </div>
-                <div>
-                    <button type='submit'>Submit</button>
-                </div>
+                <button className='meep-button' type='submit'>Submit</button>
 
             </form>
         </div>

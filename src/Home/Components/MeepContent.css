@@ -7,18 +7,40 @@
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.meep-Container input {
+
+    height: 3.5vh;
+    padding: 8px;
+    width: 21vw;
+    border-radius: 7px;
+    border: 2px solid #393E46;
+    background-color: #272121;
+    color: white;
+    position: relative;
+}
+
+.meep-Container input:hover {
+
+    transform: scale(1.007);
 
 }
 
-.input-Container {
-    width: 100%;
-
+.meep-Container button {
+    height: 85%;
+    width: 5vw;
+    background-color: white;
+    border-radius: 7px;
+    border: none;
+    color: black;
+    aspect-ratio: 1;
+    position: absolute;
+    right: 3px;
+    top: 8%;
 }
 
-.textArea {
-    resize: none;
-
-}
 
 .title-Container {
     width: 100%;

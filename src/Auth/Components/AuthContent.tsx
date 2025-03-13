@@ -113,7 +113,7 @@ export default function AuthContent() {
                     {
                         !loginMode && <>
                             <label><b>Name</b></label>
-                            <input value={name} id="username" placeholder="Username" onChange={(e) => { setName(e.target.value) }}></input>
+                            <input value={name} id="username" placeholder="Name" onChange={(e) => { setName(e.target.value) }}></input>
                         </>
 
                     }

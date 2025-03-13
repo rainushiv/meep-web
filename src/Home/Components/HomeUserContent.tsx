@@ -28,7 +28,7 @@ type user = {
 export default function HomeUserContent({ user }: userlist) {
 
     return (
-        <div className='meep-Container'>
+        <div className='homemeep-Container'>
             <ul className='user-list'>
 
 
