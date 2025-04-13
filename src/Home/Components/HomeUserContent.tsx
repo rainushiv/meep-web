@@ -26,13 +26,11 @@ type user = {
 }
 
 export default function HomeUserContent({ user }: userlist) {
-
     return (
         <div className='homemeep-Container'>
             <ul className='user-list'>
 
-
-                {user.map(user => { return < HomeUserCard id={user.id} name={user.name} username={user.username}></HomeUserCard> })};
+                {user.map(user => { return < HomeUserCard key={user.id}id={user.id} name={user.name} username={user.username}></HomeUserCard> })};
             </ul>
         </div>
     );

@@ -1,11 +1,14 @@
 
-import { FormEvent, useState } from "react"
+import { FormEvent, useState,useRef,useEffect } from "react"
 import { useStoreAuth } from "./AuthStore";
 import './AuthContent.css'
 
 export default function AuthContent() {
 
     const [loginMode, setLoginMode] = useState(false);
+    const [file,setFile]=useState<File>();
+    const [previewUrl, setPreviewUrl] = useState<string |null | ArrayBuffer>(null)
+    const[isValid,setIsValid] = useState<Boolean>(); 
 
     const isLogin = useStoreAuth((state) => state.isLogin)
     const Login = useStoreAuth((state) => state.Login)
@@ -31,18 +34,16 @@ export default function AuthContent() {
 
         if (!loginMode) {
             try {
-
+                const formData =  new FormData()
+                formData.append("name",name) 
+                formData.append("avatar",file!)
+                formData.append("username",username)
+                formData.append("email",email)
+                formData.append("password",password)
                 const res = await fetch("api/users/createuser", {
                     method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        username: username,
-                        email: email,
-                        password: password,
-                    })
+                    
+                    body: formData
 
 
                 })
@@ -99,16 +100,61 @@ export default function AuthContent() {
 
     }
 
+    const filePicker = useRef<HTMLInputElement>(null);
+
+  const pickImageHandler =() =>{
+    if(filePicker.current){
+
+    filePicker.current.click()
+    }}
+
+const pickedHandler = (event:React.ChangeEvent<HTMLInputElement>) =>{
+let pickedFile
+    if(event.target.files && event.target.files.length === 1){
+        pickedFile = event.target.files[0]
+        setFile(pickedFile)
+        setIsValid(true)
+    }else{
+        setIsValid(false)
+    }}
 
 
+    useEffect(()=>{
 
+        if(!file){
+            return
+        }else{
+            const fileReader = new FileReader();
 
+            fileReader.onload= ()=>{
+                setPreviewUrl(fileReader.result)
+            };
+            fileReader.readAsDataURL(file);
+        }
 
+    },[file])
 
     return (
         <div className="auth-container">
             <h2>{loginMode ? "Login" : "Sign-up"}</h2>
             <form onSubmit={handleSubmit}>
+                <div className="avatarInput-Container">
+                    {
+                        !loginMode && <>
+                            <label className="avatar-Title"><b>Avatar</b></label>
+                        <div className="avatar-Container">
+                {typeof previewUrl ==='string' ?  <img src={previewUrl} alt='preview'></img> : 
+
+                <button className='upload-button' type='button' onClick={pickImageHandler}>upload</button>
+ 
+                 }  
+
+                        </div>
+                <input type='file' ref={filePicker} style={{display:'none'}} accept='.jpg,.png,.jpeg' onChange={pickedHandler}></input>
+                        </>
+
+                    }
+                </div>
                 <div>
                     {
                         !loginMode && <>

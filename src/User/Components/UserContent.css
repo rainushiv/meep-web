@@ -1,14 +1,12 @@
 .userContent-Container {
-
+    max-width: fit-content;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    gap: 50px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     z-index: 10;
 }
 
@@ -20,6 +18,13 @@
 
     display: flex;
     gap: 10px;
+}
+.test{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    max-height: 600px;
+    border-radius: 20px;
 }
 
 .darkBG {
@@ -149,4 +154,12 @@
     box-shadow: none;
     transform: none;
     background: whitesmoke;
+}
+.tab-container { 
+    background-color:#363333;
+}
+
+.tab-text{ 
+
+    color: white;
 }

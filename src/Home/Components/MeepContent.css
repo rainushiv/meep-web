@@ -1,6 +1,21 @@
 .sure {
     color: white;
 }
+.file-container{
+    border: solid 1px rgba(246, 233, 233, .35);
+    border-radius: 8px;
+    height: 240px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+.file-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .meep-Container {
     margin-top: 50px;
@@ -8,6 +23,11 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
+}
+.upload-button{
+    position: absolute;
+    left: 42%;
+    top: 40%;    
 }
 
 .meep-Container input {
@@ -28,8 +48,8 @@
 
 }
 
-.meep-Container button {
-    height: 85%;
+.meep-button {
+    height: 50px;
     width: 5vw;
     background-color: white;
     border-radius: 7px;
@@ -38,7 +58,7 @@
     aspect-ratio: 1;
     position: absolute;
     right: 3px;
-    top: 8%;
+    bottom: 0;
 }
 
 

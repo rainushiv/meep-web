@@ -10,6 +10,16 @@ import MapFollow from "./MapFollow";
 import MapFollowing from "./MapFollowing";
 import Button from '@mui/joy/Button';
 import FollowButton from "./FollowButton";
+import UserMeeps from "./UserMeeps";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from "react-intersection-observer";
+import Meeps from "../../Meeps/Pages/Meeps";
+import Tabs from '@mui/joy/Tabs';
+import TabList from '@mui/joy/TabList';
+import Tab from '@mui/joy/Tab';
+import TabPanel from '@mui/joy/TabPanel';
+import {colors, createTheme,hexToRgb,rgbToHex,ThemeProvider} from '@mui/material'
+import { grey } from "@mui/material/colors";
 
 
 type propId = {
@@ -18,22 +28,22 @@ type propId = {
     propId: string | undefined;
     followState: boolean;
 }
-
+type meeps = {
+        usermeeps: meep[]
+    }
+ type meep = {
+        id: number,
+        name: string,
+        body: string
+    }
 export default function UserContent({ propId }: propId) {
 
     const [isOpenFollower, setIsOpenFollower] = useState(false);
     const [isOpenFollowing, setIsOpenFollowing] = useState(false);
-
-    type meeps = {
-        Meeps: meep[]
-    }
-    type meep = {
-
-        name: string,
-        body: string
-    }
+    const [isLoading, setIsLoading] = useState(false);    
     const [currentUser, setCurrentUser] = useState<any>()
-    const [userMeeps, setUserMeeps] = useState();
+    const [userMeeps, setUserMeeps] = useState([]);
+    const [hasMore, setHasMore] = useState(false);
     const [currentUserFollowers, setCurrentUserFollowers] = useState();
     const [currentUserFollowing, setCurrentUserFollowing] = useState();
     const Id = useStoreAuth((state) => state.Id)
@@ -55,40 +65,63 @@ export default function UserContent({ propId }: propId) {
 
 
         }
-
         getCurrentUser()
     }, [])
 
     useEffect(() => {
 
         async function getCurrentUserMeeps() {
+            setIsLoading(true);
             const res = await fetch(`http://localhost:5173/api/usermeeps/getusermeeps/${currentId}`)
             const data = await res.json()
 
 
-            setUserMeeps(data.usermeeps)
+            setUserMeeps( data.usermeeps)
             console.log(userMeeps)
         }
         getCurrentUserMeeps()
     }, [])
+
+    const getMeeps = async({pageParam}:{pageParam:Number})=>{
+        const response = await fetch (`http://localhost:5173/api/usermeeps/getusermeeps/${currentId}?page=${pageParam}`)
+        return await response.json()
+    }
+
+    
+    const {data, fetchNextPage  } = useInfiniteQuery({
+        queryKey: ["meeps"],
+        queryFn: getMeeps ,
+        initialPageParam: 1,
+        getNextPageParam:(lastPage, allPages) =>{
+            return allPages.length+1
+        }
+
+    })    
+
+    
+const content = data?.pages.map((meeps:meeps)=> meeps.usermeeps.map((meeps)=> { return <div><UserMeeps id={meeps.id} name={meeps.name} body={meeps.body} ></UserMeeps></div>}))
+    console.log(content?.length)
+
+    const {ref,inView} = useInView()
+
+    useEffect(()=>{
+if(inView){
+    fetchNextPage()
+}
+
+    },[fetchNextPage,inView])
+
     useEffect(() => {
 
         async function getCurrentUserFollowers() {
             const res = await fetch(`http://localhost:5173/api/users/${currentId}/getcurrentuserfollowers`)
             const data = await res.json()
-
-
             setCurrentUserFollowers(data.followers)
-
-
         }
         getCurrentUserFollowers()
 
         console.log(currentUserFollowers)
     }, [])
-
-
-
     useEffect(() => {
 
         async function getCurrentUserFollowing() {
@@ -101,9 +134,6 @@ export default function UserContent({ propId }: propId) {
         getCurrentUserFollowing()
 
     }, [])
-
-
-
 
 
     return (
@@ -162,15 +192,20 @@ export default function UserContent({ propId }: propId) {
                     </div>
                 </div>
             }
+<div>
+         <button> meep feed</button>
 
-            <div>
+         <button> meep feed</button>
+ </div>
+          <div  className="test">
                 <ul>
 
+        {content ? content: <p>no meeps</p>}
 
-                    {userMeeps && <MapUserMeeps meeps={userMeeps}></MapUserMeeps>}
                 </ul>
             </div>
         </div>
     )
 
+                    //{userMeeps && <MapUserMeeps propId={propId} meeps={userMeeps}></MapUserMeeps>}
 }
