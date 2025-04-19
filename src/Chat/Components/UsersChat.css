@@ -1,0 +1,9 @@
+.user-Container{
+width: 22%;
+height: 100vh;
+margin-left: 20px;
+margin-top: 20px;
+border-radius: 8px;
+background-color: white;
+color: black;
+}

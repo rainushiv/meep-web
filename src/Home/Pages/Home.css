@@ -27,14 +27,18 @@
 
 .homemeep-Container {
     margin-top: 10px;
+    height: 800px;
     max-width: fit-content;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 40px;
     border: solid 1px rgba(246, 233, 233, .35);
     border-radius: 10px;
-    padding: 30px;
+    padding: 10px;
     overflow: scroll;
+    background-color: white;
+   display: flex;
+   flex-direction: column; 
 }
 
 .user-list {
@@ -45,4 +49,8 @@
 .ref-div{
     width: 300px;
     height: 30px;
+}
+.AllContent-Container{
+
+display: flex;
 }

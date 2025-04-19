@@ -1,0 +1,41 @@
+
+.meepfeed-Container{
+
+    min-height: 150px;
+    width: 85%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.userinfo-Container{
+    display: flex;
+    justify-content: space-between;
+}
+.username-Container{
+
+    margin: 12px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+}
+.meepcontent-Container{
+    margin-top:1% ;
+    margin-left: 7%;
+    margin-bottom:7% ;
+
+}
+.meepImages-Container{
+display: flex;
+    align-self: center;
+justify-self: center;
+margin-bottom: 20px;
+}
+.meepImage{
+    height: 350px;
+
+    width: 650px;
+    object-fit: cover;
+border-radius: 20px;
+
+}

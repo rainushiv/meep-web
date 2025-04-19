@@ -5,7 +5,8 @@ import './SearchBox.css'
 import { Link } from "react-router-dom";
 import OtherUser from "../../User/Pages/OtherUser";
 
-type suggestion = {
+type user = {
+    _id: number,
     _source: {
         id: String,
         name: String,
@@ -13,25 +14,25 @@ type suggestion = {
         email: String
     }
 }
+type resultuser = {
+hits:user[]
+}
 
 export default function SearchBox() {
     const [value, setValue] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false)
     const [suggestions, setSuggestions]: any[] = useState([])
-    const [searchedUser, setSearchedUser]: any = useState();
+    const [searchedUser, setSearchedUser] = useState<resultuser>();
     useEffect(() => {
         const getData = setTimeout(() => {
 
             async function getSearchedUser() {
 
-
                 try {
-
-
                     const res = await fetch(`api/users/getsearcheduser?username={${value}}`)
                     const data = await res.json()
-                    const hit = data.hits.hits[0]
-                    setSearchedUser(hit)
+                    console.log(data.result)
+                    setSearchedUser(data.result)
 
                 } catch (err) {
                     console.log(err)
@@ -52,47 +53,23 @@ export default function SearchBox() {
 
     }, [value])
 
-    useEffect(() => {
-
-        async function getSuggestions() {
-
-            try {
-                const res = await fetch('api/users/getuserselastic')
-                const data = await res.json()
-                const hits = data.data.hits.hits
-                setSuggestions(hits)
-
-                console.log(hits)
-            }
-            catch (err) {
-                console.log(err)
-            }
-
-        }
-
-        getSuggestions();
-
-
-    }, [])
-
-
+                        console.log(searchedUser)
+  
     return (
 
         <div className="input-wrapper">
-            <input placeholder="Type to search..." value={value} onChange={(e) => { setValue(e.target.value), setShowSuggestions(true) }}></input>
+            <input placeholder="Type to search..." value={value} onChange={(e) => { setValue(e.target.value) }}></input>
             <div className="suggestion-container">
 
                 {
 
-                    showSuggestions && suggestions.length !== 0 && (suggestions.map((suggestion: suggestion) => {
-
-                        const isMatch = suggestion._source.username.toLowerCase().indexOf(value) > -1;
-                        return <div>
+                     searchedUser && (searchedUser.hits.map((user: user) => {
+                        return <div key={user._id}>
                             {
-                                isMatch && <Link to={`/otheruser/${suggestion._source.id}`}>
+                                 <Link to={`/otheruser/${user._id}`}>
                                     <div className="row-container">
 
-                                        <p>{suggestion._source.username}</p>
+                                        <p>{user._source.username}</p>
                                     </div>
 
                                 </Link>

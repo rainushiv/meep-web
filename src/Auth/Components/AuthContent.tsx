@@ -41,21 +41,15 @@ export default function AuthContent() {
                 formData.append("email",email)
                 formData.append("password",password)
                 const res = await fetch("api/users/createuser", {
-                    method: "POST",
-                    
+                    method: "POST", 
                     body: formData
-
-
                 })
-
-
-
-
+                console.log(res)
                 const data = await res.json()
 
-                console.log(data)
+                console.log(data.user)
 
-                Login(data.user.id)
+                Login(data.user)
 
             }
             catch (err) {
@@ -76,8 +70,8 @@ export default function AuthContent() {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        email: email,
-                        password: password,
+                        email: email || "yuhh234@gmail.com",
+                        password: password || "yuhh234",
                     })
 
 

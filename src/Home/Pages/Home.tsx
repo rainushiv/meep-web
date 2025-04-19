@@ -1,95 +1,119 @@
-import Header from '../../Shared/Components/Header';
-import MeepContent from '../Components/MeepContent';
-import Divider from '@mui/joy/Divider';
-import './Home.css'
-import HomeMeepContent from '../Components/HomeMeepContent';
-import HomeUserContent from '../Components/HomeUserContent';
-import { useStoreAuth } from '../../Auth/Components/AuthStore';
-import {PageStore} from '../../Shared/Components/PageStore'
-import { useEffect, useState } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import HomeUserCard from '../Components/HomeUserCard';
-import Button from '@mui/joy/Button';
-import {useInView} from 'react-intersection-observer'
-
+import Header from "../../Shared/Components/Header";
+import MeepContent from "../Components/MeepContent";
+import Divider from "@mui/joy/Divider";
+import "./Home.css";
+import HomeMeepContent from "../Components/HomeMeepContent";
+import HomeUserContent from "../Components/HomeUserContent";
+import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import { PageStore } from "../../Shared/Components/PageStore";
+import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import HomeUserCard from "../Components/HomeUserCard";
+import Button from "@mui/joy/Button";
+import { useInView } from "react-intersection-observer";
+import SideBarContent from "../Components/sideBarContent";
+import RecBar from "../Components/RecBar";
+import HomeUserFeed from "../Components/HomeUserFeed";
+import NotificationBar from "../Components/NotificationBar";
+import { Link } from "react-router-dom";
 
 type user = {
-    id: number,
-    name: String,
-    username: String,
-    email: String,
-    password: String
+  id: number;
+  name: String;
+  username: String;
+  email: String;
+  password: String;
+  avatarUrl:string;
+};
 
-
-}
-
-type users ={
-    users:user[]
-}
+type users = {
+  users: user[];
+};
 
 
 export default function Home() {
+  const [userData, setUserData] = useState<any>(null);
+  const [users, setUser] = useState<any>(null);
+  const [meeps, setMeeps] = useState();
 
-
-    const [userData, setUserData] = useState<any>(null);
-    const [users, setUser] = useState<any>(null);
-    const [meeps, setMeeps] = useState();
-
-    const Id = useStoreAuth((state) => state.Id)
-    const getUsers =async({pageParam}: {pageParam:number}) =>{
-        const response = await fetch(`api/users/getusers?page=${pageParam}`)
-            return await response.json()
-    }
-    const {data,isLoading, fetchNextPage,hasNextPage,} = useInfiniteQuery({
-        queryKey:["users"],
-        queryFn:getUsers,
-        initialPageParam:1,
-        getNextPageParam:(lastPage,allPages)=>
-            {
-                return allPages.length+1 
-            }
+  const Id = useStoreAuth((state) => state.Id);
+  const getUsers = async ({ pageParam }: { pageParam: number }) => {
+    const response = await fetch(`api/users/getusers?page=${pageParam}`);
+    return await response.json();
+  };
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return allPages.length + 1;
+    },
+  });
+  const content = data?.pages.map((users: users) =>
+    users.users.map((user) => {
+      if(user.id != Id){
+return (
+        <div>
+      <HomeUserCard
+          key={user.id}
+            id={user.id}
+            name={user.name}
+            username={user.username}
+            avatarUrl={user.avatarUrl}
+          ></HomeUserCard>
+        
+         </div>
+      )
+      }
+      ;
     })
-const content = data?.pages.map((users:users)=>users.users.map( (user)=>{ return <div><HomeUserCard id={user.id} name={user.name} username={user.username} ></HomeUserCard></div>}) )
-console.log(content)
+  );
 
-    // useEffect(() => {
-    //     async function getMeeps() {
-    //         setIsLoading(true)
-    //         const res = await fetch(`api/usermeeps/usermeepfeed/${Id}`)
-    //         const data = await res.json()
-    //         setMeeps(data.usermeepfeed);
-    //         setIsLoading(false);
+  const { ref, inView } = useInView();
 
-    //     }
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+ }, [fetchNextPage, inView]);
 
-    //     getMeeps()
-    // }, [])
+ useEffect(()=>{
 
+    async function getFollowing(){
+const res = await fetch(`api/users/${Id}/getcurrentuserfollowing`)
+const data =res.json()
 
-    const {ref,inView} = useInView();
+console.log(data)
 
-    useEffect(()=>{
-if(inView && hasNextPage){
-    fetchNextPage()
-}
-    },[fetchNextPage,inView])
+    }
+ },[])
 
-    return (
-        <>
-            <Header />
-<div className='homemeep-Container'>
-<ul className='user-list'>
+  return (
+    <>
+      <Header />
+      <div className="AllContent-Container">
+        <div className="Side-Bar">
+            <NotificationBar></NotificationBar>
+
+          <SideBarContent name="following"></SideBarContent>
+        </div>
+        <div className="homemeep-Container">
+
+          <HomeUserContent></HomeUserContent>
+          <HomeUserFeed></HomeUserFeed>
+        </div>
+
+        <div>
+          <RecBar content={content}></RecBar>
+        </div>
+      </div>
+    </>
+  );
+  /* <ul className='user-list'>
 
             {content}
 
             <div ref={ref} className='ref-div'></div>
 </ul>
-
-</div>
-            <MeepContent />
-
-            {!isLoading && meeps && <HomeMeepContent meeps={meeps}></HomeMeepContent>}
-        </>
-    );
+} */
 }
-

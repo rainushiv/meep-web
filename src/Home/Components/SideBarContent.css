@@ -1,0 +1,15 @@
+
+.sideBar-Content{
+width: 280px;
+height: 450px;
+margin-left: 20px;
+margin-top: 20px;
+border-radius: 8px;
+background-color: white;
+color: black;
+}
+
+.sideBar-Content h3{
+    padding-top: 20px;
+    padding-left: 90px;
+}

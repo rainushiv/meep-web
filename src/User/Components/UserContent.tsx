@@ -1,211 +1,199 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import AttachmentIcon from "@mui/icons-material/Attachment";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
-import MapUserMeeps from "./MapUserMeeps";
-import './UserContent.css'
-import FollowCard from "./FollowCard";
-import Avatar from "@mui/joy/Avatar/Avatar";
-import { Link } from "react-router-dom";
-import Divider from "@mui/joy/Divider/Divider";
-import MapFollow from "./MapFollow";
-import MapFollowing from "./MapFollowing";
-import Button from '@mui/joy/Button';
-import FollowButton from "./FollowButton";
-import UserMeeps from "./UserMeeps";
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from "react-intersection-observer";
-import Meeps from "../../Meeps/Pages/Meeps";
-import Tabs from '@mui/joy/Tabs';
-import TabList from '@mui/joy/TabList';
-import Tab from '@mui/joy/Tab';
-import TabPanel from '@mui/joy/TabPanel';
-import {colors, createTheme,hexToRgb,rgbToHex,ThemeProvider} from '@mui/material'
-import { grey } from "@mui/material/colors";
+import "./UserContent.css";
+import Button from "@mui/joy/Button";
+import Divider from "@mui/joy/Divider";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/joy/IconButton";
 
-
-type propId = {
-
-
-    propId: string | undefined;
-    followState: boolean;
-}
-type meeps = {
-        usermeeps: meep[]
-    }
- type meep = {
-        id: number,
-        name: string,
-        body: string
-    }
-export default function UserContent({ propId }: propId) {
-
-    const [isOpenFollower, setIsOpenFollower] = useState(false);
-    const [isOpenFollowing, setIsOpenFollowing] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);    
-    const [currentUser, setCurrentUser] = useState<any>()
-    const [userMeeps, setUserMeeps] = useState([]);
-    const [hasMore, setHasMore] = useState(false);
-    const [currentUserFollowers, setCurrentUserFollowers] = useState();
-    const [currentUserFollowing, setCurrentUserFollowing] = useState();
-    const Id = useStoreAuth((state) => state.Id)
-
-
-    const currentId = propId ? propId : Id
-
-    console.log(currentId)
-    useEffect(() => {
-
-        async function getCurrentUser() {
-
-            // const id = Id;
-            // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
-            const res = await fetch(`http://localhost:5173/api/users/${currentId}/getcurrentuser`)
-            const data = await res.json()
-
-            setCurrentUser(data.user[0])
-
-
-        }
-        getCurrentUser()
-    }, [])
-
-    useEffect(() => {
-
-        async function getCurrentUserMeeps() {
-            setIsLoading(true);
-            const res = await fetch(`http://localhost:5173/api/usermeeps/getusermeeps/${currentId}`)
-            const data = await res.json()
-
-
-            setUserMeeps( data.usermeeps)
-            console.log(userMeeps)
-        }
-        getCurrentUserMeeps()
-    }, [])
-
-    const getMeeps = async({pageParam}:{pageParam:Number})=>{
-        const response = await fetch (`http://localhost:5173/api/usermeeps/getusermeeps/${currentId}?page=${pageParam}`)
-        return await response.json()
-    }
-
-    
-    const {data, fetchNextPage  } = useInfiniteQuery({
-        queryKey: ["meeps"],
-        queryFn: getMeeps ,
-        initialPageParam: 1,
-        getNextPageParam:(lastPage, allPages) =>{
-            return allPages.length+1
-        }
-
-    })    
-
-    
-const content = data?.pages.map((meeps:meeps)=> meeps.usermeeps.map((meeps)=> { return <div><UserMeeps id={meeps.id} name={meeps.name} body={meeps.body} ></UserMeeps></div>}))
-    console.log(content?.length)
-
-    const {ref,inView} = useInView()
-
-    useEffect(()=>{
-if(inView){
-    fetchNextPage()
+type prop = {
+    Id:string
 }
 
-    },[fetchNextPage,inView])
+export default function UserContent({Id}:prop) {
+  const [currentUser, setCurrentUser] = useState<any>();
+  const [isOpenFollower, setIsOpenFollower] = useState(false);
+  const [value, setValue] = useState("");
+  const [isValid, setIsValid] = useState<boolean>();
+  const [file, setFile] = useState<File>();
+  const [previewUrl, setPreviewUrl] = useState<string | null | ArrayBuffer>(
+    null
+  );
+
+  useEffect(() => {
+    async function getCurrentUser() {
+      // const id = Id;
+      // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
+      const res = await fetch(
+        `http://localhost:5173/api/users/${Id}/getcurrentuser`
+      );
+      const data = await res.json();
+      setCurrentUser(data.user[0]);
+    }
+    getCurrentUser();
+  }, []);
+
+
+  const meepSubmitHandler = async () => {
+    if (!file)
+      try {
+        const res = await fetch("api/usermeeps/createmeep", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: null,
+            body: value,
+            creatorId: Id,
+          }),
+        });
+
+        setValue("");
+        setPreviewUrl(null)
+      } catch (err) {
+        console.log(err);
+      }
+    else if (file && value && Id) {
+      const formData = new FormData();
+      formData.append("body", value);
+      formData.append("creatorId", Id.toString());
+      formData.append("image", file);
+      try {
+        const res = await fetch("api/usermeeps/createimgmeep", {
+          method: "POST",
+          body: formData,
+        });
+        setValue("");
+        setPreviewUrl(null);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  const filePicker = useRef<HTMLInputElement>(null);
+
+  const pickImageHandler = () => {
+    if (filePicker.current) {
+      filePicker.current.click();
+    }
+  };
+  const pickedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let pickedFile;
+    if (event.target.files && event.target.files.length === 1) {
+      pickedFile = event.target.files[0];
+      setFile(pickedFile);
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    } else {
+      const fileReader = new FileReader();
+
+      fileReader.onload = () => {
+        setPreviewUrl(fileReader.result);
+      };
+      fileReader.readAsDataURL(file);
+    }
+  }, [file]);
+
+
+const [isFollowing,setIsFollowing] = useState<Boolean>(false);
+  const authId = useStoreAuth((state) => state.Id);
+
 
     useEffect(() => {
 
-        async function getCurrentUserFollowers() {
-            const res = await fetch(`http://localhost:5173/api/users/${currentId}/getcurrentuserfollowers`)
-            const data = await res.json()
-            setCurrentUserFollowers(data.followers)
-        }
-        getCurrentUserFollowers()
-
-        console.log(currentUserFollowers)
-    }, [])
-    useEffect(() => {
-
-        async function getCurrentUserFollowing() {
-            const res = await fetch(`http://localhost:5173/api/users/${currentId}/getcurrentuserfollowing`)
+        async function getIfFollowing() {
+            const res = await fetch(`http://localhost:5173/api/users/checkfollowing/${Id}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    profileId: authId
+                })
+            })
             const data = await res.json()
 
-
-            setCurrentUserFollowing(data.following)
+            const follower = data.following[0]
+            if (follower === undefined || follower.length === 0) {
+                setIsFollowing(false)
+            }
+            else if (follower !== 0) {
+                setIsFollowing(true)
+            }
+            console.log(isFollowing)
         }
-        getCurrentUserFollowing()
-
+        getIfFollowing()
     }, [])
 
 
-    return (
+        async function followUserHandler() {
 
-        <div className="userContent-Container">
-            <div>
+        try {
 
-                <Avatar></Avatar>
-                <div className="name-Container">
+            const res = await fetch(`http://localhost:5173/api/users/follow/${Id}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    profileId: authId
+                })
+            })
 
-                    {currentUser && currentUser.name}
-                </div>
+console.log(res)
+            setIsFollowing(true)
+        } catch (err) {
+            console.log("error while following")
+        }
+    }
 
-                <div className="username-Container">
-                    {currentUser && currentUser.username}
 
-                </div>
-                <button onClick={() => { setIsOpenFollower(true) }}>Followers</button>
-                <button onClick={() => { setIsOpenFollowing(true) }}>Following</button>
+  return (
+    <div>
+      <div className="image-Container">
+        <img
+          className="profile-background"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEV/AP/V1f06AAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII="
+        ></img>
 
-                {!(propId === "") && <FollowButton currentId={currentId}></FollowButton>}
-
-            </div>
-
-            {
-                isOpenFollower &&
-                <div className="darkBG" onClick={() => { setIsOpenFollower(false) }}>
-                    <div className="centered">
-                        <div className="modal">
-                            <div className="modalHeader">
-                                <div className="heading">
-                                    <div>Followers</div>
-                                    <Divider></Divider>
-                                </div>
-                            </div>
-                            {currentUserFollowers && <MapFollow follows={currentUserFollowers}></MapFollow>}
-                        </div>
-                    </div>
-
-                </div>
-            }
-            {
-                isOpenFollowing &&
-                <div className="darkBG" onClick={() => { setIsOpenFollowing(false) }}>
-                    <div className="centered">
-
-                        <div className="modal">
-                            <div className="modalHeader">
-                                <div className="heading">
-                                    <div>Following</div>
-                                    <Divider></Divider>
-                                </div>
-                            </div>
-                            {currentUserFollowing && <MapFollowing follows={currentUserFollowing}></MapFollowing>}
-                        </div>
-                    </div>
-                </div>
-            }
-<div>
-         <button> meep feed</button>
-
-         <button> meep feed</button>
- </div>
-          <div  className="test">
-                <ul>
-
-        {content ? content: <p>no meeps</p>}
-
-                </ul>
-            </div>
+        <img
+          className="avatar"
+          src={currentUser && currentUser.avatarUrl}
+        ></img>
+      </div>
+      <div className="userProfile-Container">
+        <div>
+          <h1>{currentUser && currentUser.name}</h1>
+          <h3>{currentUser && `@${currentUser.username}`}</h3>
         </div>
-    )
+        <div>
+          
+                     <Button 
+                        variant="solid"
+                        size="md"
+                        color="primary"
+                        aria-label="Explore Bahamas Islands"
+                        sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600,marginTop:2 }}
+                        onClick={followUserHandler}
+                    >
+                       {isFollowing ?"Following": "Follow" }
+                    </Button>
 
-                    //{userMeeps && <MapUserMeeps propId={propId} meeps={userMeeps}></MapUserMeeps>}
+
+        </div>
+      </div>
+
+      
+    </div>
+  );
 }

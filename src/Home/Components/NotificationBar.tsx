@@ -1,0 +1,88 @@
+import Divider from "@mui/joy/Divider";
+import "./Notification.css"
+import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import { useEffect, useState } from "react";
+type notification = {
+  id: number;
+  senduser: number;
+  recieveuser: number;
+  action: string;
+};
+type user = {
+    id:number ,
+    name: string,
+    username: string,
+}
+
+type notifications = {
+    notification: notification,
+    users: user
+};
+type notificationResult = {
+    notifications: notifications[]
+
+
+}
+
+
+export default function NotificationBar(){
+const [ notifications, setNotifications] = useState<notificationResult>();
+          const Id = useStoreAuth((state) => state.Id);
+          
+               useEffect(()=>{
+          
+                  async function getUserFollowing(){
+          
+                   const res = await fetch(`api/users/usernotifications/${Id}`)
+                   const data =await  res.json()
+                   console.log(data.following)
+          
+                   setNotifications(data)
+          
+                  }
+                  getUserFollowing()
+                   
+          
+               },[])
+          
+          const content = notifications?.notifications.map((data:notifications)=>{
+          if(data.notification.action === "liked"){
+              return (
+<>
+
+                  <div className="notification-Container">
+                    {`${data.users.username} ${data.notification.action} your meep`}
+
+                  </div>
+
+                    <Divider></Divider>
+ </>
+              )
+          }else{
+            return(
+<>
+
+                  <div className="notification-Container">
+                    {`${data.users.username} ${data.notification.action} you`}
+
+                  </div>
+
+<Divider></Divider>
+ 
+</>
+           )
+          }
+         })
+          
+
+    return (
+       <div className="notiBar-Content">
+    <h3>Notification</h3>
+<Divider></Divider>
+{content}
+</div>
+
+
+    )
+
+}

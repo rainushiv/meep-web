@@ -1,0 +1,10 @@
+.chatbox-Container{
+width: 77%;
+height: 100vh;
+margin-left: 2.5vh;
+margin-top: 2.5vh;
+margin-right: 2.5vh;
+border-radius: 8px;
+background-color: white;
+color: black;
+}

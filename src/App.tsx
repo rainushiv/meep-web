@@ -6,6 +6,7 @@ import Auth from "./Auth/Pages/Auth";
 import Meeps from "./Meeps/Pages/Meeps";
 import User from "./User/Pages/User";
 import OtherUser from "./User/Pages/OtherUser";
+import Chat from "./Chat/Pages/Chat";
 
 function App() {
   const isLogin = useStoreAuth((state) => state.isLogin);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/meeps" element={<Meeps />} />
         <Route path="/user" element={<User />} />
+        <Route path="/chat" element={<Chat/>}/>
         <Route path="/otheruser/:uid" element={<OtherUser />} />
         <Route path="/auth" element={<Navigate to="/home" />} />
       </>
@@ -24,12 +26,9 @@ function App() {
   } else {
     route = (
       <>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route index element={<Auth />} />
+        <Route path="/home" element={<Navigate to="/Auth" />} />dd
         <Route path="/auth" element={<Auth />} />
-        <Route path="/meeps" element={<Meeps />} />
-        <Route path="/otheruser/:uid" element={<OtherUser />} />
-        <Route path="/user" element={<Navigate to="/home" />} />
       </>
     );
   }
