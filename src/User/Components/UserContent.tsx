@@ -6,6 +6,7 @@ import Button from "@mui/joy/Button";
 import Divider from "@mui/joy/Divider";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/joy/IconButton";
+import { APIURL } from "../../App";
 
 type prop = {
     Id:string
@@ -140,7 +141,7 @@ const [isFollowing,setIsFollowing] = useState<Boolean>(false);
 
         try {
 
-            const res = await fetch(`http://localhost:5173/api/users/follow/${Id}`, {
+            const res = await fetch(`${APIURL}/api/users/follow/${Id}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

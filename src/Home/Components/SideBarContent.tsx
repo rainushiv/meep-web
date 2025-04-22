@@ -5,6 +5,7 @@ import HomeUserCard from "./HomeUserCard";
 import { useEffect, useState } from "react";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import { useAsyncError } from "react-router-dom";
+import { APIURL } from "../../App";
 interface Name{
     name:String
 }
@@ -32,9 +33,9 @@ const [followedusers, setFollowedUsers] = useState<users>()
 
         async function getUserFollowing(){
 
-         const res = await fetch(`http://localhost:5173/api/users/${Id}/getcurrentuserfollowing`)
+         const res = await fetch(`${APIURL}/api/users/${Id}/getcurrentuserfollowing`)
          const data =await  res.json()
-         console.log(data.following)
+         console.log("RUNNON")
 
          setFollowedUsers(data)
 

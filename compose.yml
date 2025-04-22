@@ -1,0 +1,12 @@
+services:
+  server:
+    image: bun-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    develop:
+      watch:
+        - action: rebuild
+          path: .

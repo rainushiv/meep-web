@@ -6,6 +6,7 @@ import Button from "@mui/joy/Button";
 import Divider from "@mui/joy/Divider";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/joy/IconButton";
+import { APIURL } from "../../App";
 export default function HomeUserContent() {
   const [currentUser, setCurrentUser] = useState<any>();
   const [isOpenFollower, setIsOpenFollower] = useState(false);
@@ -22,7 +23,7 @@ export default function HomeUserContent() {
       // const id = Id;
       // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
       const res = await fetch(
-        `http://localhost:5173/api/users/${Id}/getcurrentuser`
+        `${APIURL}/api/users/${Id}/getcurrentuser`
       );
       const data = await res.json();
       setCurrentUser(data.user[0]);
@@ -34,7 +35,7 @@ export default function HomeUserContent() {
   const meepSubmitHandler = async () => {
     if (!file)
       try {
-        const res = await fetch("api/usermeeps/createmeep", {
+        const res = await fetch(`${APIURL}/api/usermeeps/createmeep`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export default function HomeUserContent() {
       formData.append("creatorId", Id.toString());
       formData.append("image", file);
       try {
-        const res = await fetch("api/usermeeps/createimgmeep", {
+        const res = await fetch(`${APIURL}/api/usermeeps/createimgmeep`, {
           method: "POST",
           body: formData,
         });

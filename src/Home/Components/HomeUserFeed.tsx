@@ -3,6 +3,7 @@ import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import "./HomeUserFeed.css";
 import Divider from "@mui/joy/Divider";
 import MeepCard from "../UI/MeepCard";
+import { APIURL } from "../../App";
 
 type meep = {
   id: number;
@@ -11,17 +12,16 @@ type meep = {
   imageUrl:string;
 };
 export default function HomeUserFeed() {
-  const [userFeed, setUserFeed] = useState();
+  const [isLoading,setIsLoading] = useState(false)
   const [content, setContent] = useState();
   const Id = useStoreAuth((state) => state.Id);
 
   async function getFeed() {
-    const response = await fetch(`api/usermeeps/usermeepfeed/${Id}`);
+    const response = await fetch(`${APIURL}/api/usermeeps/usermeepfeed/${Id}`);
     const data = await response.json();
     const content = data.usermeepfeed.map((usermeep: meep) => {
       return (
         <MeepCard
-          key={usermeep.id}
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
@@ -39,7 +39,8 @@ export default function HomeUserFeed() {
   }, []);
 
   async function getUserMeeps() {
-    const response = await fetch(`api/usermeeps/getusermeeps/${Id}?page=1`);
+    setIsLoading(true)
+    const response = await fetch(`${APIURL}/api/usermeeps/getusermeeps/${Id}?page=1`);
     const data = await response.json();
 
     const content = data.usermeeps.map((usermeep: meep) => {
@@ -54,15 +55,19 @@ export default function HomeUserFeed() {
       );
     });
     setContent(content);
+
+    setIsLoading(false)
   }
 
   async function getUserImgMeeps() {
-    const response = await fetch(`api/usermeeps/getuserimgmeeps/${Id}`);
+    setIsLoading(true)
+    const response = await fetch(`${APIURL}/api/usermeeps/getuserimgmeeps/${Id}`);
     const data = await response.json();
 
     const content = data.meeps.map((usermeep: meep) => {
       return (
         <MeepCard
+
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
@@ -72,10 +77,14 @@ export default function HomeUserFeed() {
       );
     });
     setContent(content);
+
+    setIsLoading(false)
   }
 
   async function getUserLikes() {
-    const response = await fetch(`api/usermeeps/getlikedmeeps/${Id}`);
+
+    setIsLoading(true)
+    const response = await fetch(`${APIURL}/api/usermeeps/getlikedmeeps/${Id}`);
     const data = await response.json();
     const content = data.likemeeps.map((usermeep: meep) => {
       return (
@@ -89,6 +98,7 @@ export default function HomeUserFeed() {
       );
     });
     setContent(content);
+    setIsLoading(false)
  
   }
   return (
@@ -101,7 +111,7 @@ export default function HomeUserFeed() {
       </div>
 
       <Divider></Divider>
-      <div className="homeUserFeed-Container">{content}</div>
+      <div className="homeUserFeed-Container">{!isLoading && content}</div>
     </>
   );
 }

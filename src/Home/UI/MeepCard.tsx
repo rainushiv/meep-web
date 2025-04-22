@@ -6,6 +6,7 @@ import IconButton from "@mui/joy/IconButton";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import { APIURL } from "../../App";
 interface Props {
   id: number;
   body: string;
@@ -13,7 +14,11 @@ interface Props {
   creatorId: number;
   userMeep: boolean
 }
+type isLiked =  {
+  userId: number
+}
 export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Props) {
+  const [isLoading,setIsLoading] = useState(false)
   const [currentUser, setCurrentUser] = useState<any>();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -23,7 +28,7 @@ export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Pr
       // const id = Id;
       // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
       const res = await fetch(
-        `http://localhost:5173/api/users/${creatorId}/getcurrentuser`
+        `${APIURL}/api/users/${creatorId}/getcurrentuser`
       );
       const data = await res.json();
       setCurrentUser(data.user[0]);
@@ -35,7 +40,7 @@ export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Pr
     async function checkLike() {
 if(userId){
       const res = await fetch(
-        `http://localhost:5173/api/usermeeps/checklike/${id}`,
+        `${APIURL}/api/usermeeps/checklike/${id}`,
         {
           method: "POST",
           headers: {
@@ -47,9 +52,11 @@ if(userId){
         }
       );
       const data = await res.json();
-      const liked = data.isLiked[0];
-      if ((liked.userId = id)) {
+      const liked:isLiked = data.isLiked[0];
+      if(liked){
+      if (liked.userId = id) {
         setIsLiked(true);
+      }
       }
     }
 
@@ -59,8 +66,10 @@ if(userId){
   }, []);
 
   async function LikeHandler() {
+
+if(userId){
     const res = await fetch(
-      `http://localhost:5173/api/usermeeps/likemeep/${id}`,
+      `${APIURL}/api/usermeeps/likemeep/${id}`,
       {
         method: "POST",
         headers: {
@@ -73,6 +82,7 @@ if(userId){
     );
     setIsLiked(true);
   }
+}
   const liked = {};
 
   return (

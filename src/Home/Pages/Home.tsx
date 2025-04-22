@@ -2,7 +2,6 @@ import Header from "../../Shared/Components/Header";
 import MeepContent from "../Components/MeepContent";
 import Divider from "@mui/joy/Divider";
 import "./Home.css";
-import HomeMeepContent from "../Components/HomeMeepContent";
 import HomeUserContent from "../Components/HomeUserContent";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import { PageStore } from "../../Shared/Components/PageStore";
@@ -11,11 +10,12 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import HomeUserCard from "../Components/HomeUserCard";
 import Button from "@mui/joy/Button";
 import { useInView } from "react-intersection-observer";
-import SideBarContent from "../Components/sideBarContent";
+import SideBarContent from "../Components/SideBarContent";
 import RecBar from "../Components/RecBar";
 import HomeUserFeed from "../Components/HomeUserFeed";
 import NotificationBar from "../Components/NotificationBar";
 import { Link } from "react-router-dom";
+import { APIURL } from "../../App";
 
 type user = {
   id: number;
@@ -38,7 +38,7 @@ export default function Home() {
 
   const Id = useStoreAuth((state) => state.Id);
   const getUsers = async ({ pageParam }: { pageParam: number }) => {
-    const response = await fetch(`api/users/getusers?page=${pageParam}`);
+    const response = await fetch(`${APIURL}/api/users/getusers?page=${pageParam}`);
     return await response.json();
   };
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -80,7 +80,7 @@ return (
  useEffect(()=>{
 
     async function getFollowing(){
-const res = await fetch(`api/users/${Id}/getcurrentuserfollowing`)
+const res = await fetch(`${APIURL}/api/users/${Id}/getcurrentuserfollowing`)
 const data =res.json()
 
 console.log(data)

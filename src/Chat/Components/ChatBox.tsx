@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./ChatBox.css"
 export default function ChatBox(){
+    const connection = useRef(null)
 
     useEffect(()=>{
 const socket = new WebSocket("ws://localhost:4000/chat");
@@ -14,7 +15,6 @@ socket.addEventListener("open", event => {
         console.log("Message from server ", event.data)
       })
   
-      connection.current = ws
  });
     return (
         <div className="chatbox-Container">

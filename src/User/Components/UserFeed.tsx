@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import Divider from "@mui/joy/Divider";
 import MeepCard from "../../Home/UI/MeepCard";
+import { APIURL } from "../../App";
 
 type meep = {
   id: number;
@@ -17,7 +18,7 @@ export default function UserFeed({Id}:props) {
   const [content, setContent] = useState();
 
   async function getFeed() {
-    const response = await fetch(`http://localhost:5173/api/usermeeps/usermeepfeed/${Id}`);
+    const response = await fetch(`${APIURL}/api/usermeeps/usermeepfeed/${Id}`);
     const data = await response.json();
     const content = data.usermeepfeed.map((usermeep: meep) => {
       return (
@@ -40,7 +41,7 @@ export default function UserFeed({Id}:props) {
   }, []);
 
   async function getUserMeeps() {
-    const response = await fetch(`http://localhost:5173/api/usermeeps/getusermeeps/${Id}?page=1`);
+    const response = await fetch(`${APIURL}/api/usermeeps/getusermeeps/${Id}?page=1`);
     const data = await response.json();
 
     const content = data.usermeeps.map((usermeep: meep) => {
@@ -58,7 +59,7 @@ export default function UserFeed({Id}:props) {
   }
 
   async function getUserImgMeeps() {
-    const response = await fetch(`api/usermeeps/getuserimgmeeps/${Id}`);
+    const response = await fetch(`${APIURL}api/usermeeps/getuserimgmeeps/${Id}`);
     const data = await response.json();
 
     const content = data.meeps.map((usermeep: meep) => {
@@ -76,7 +77,7 @@ export default function UserFeed({Id}:props) {
   }
 
   async function getUserLikes() {
-    const response = await fetch(`api/usermeeps/getlikedmeeps/${Id}`);
+    const response = await fetch(`${APIURL}api/usermeeps/getlikedmeeps/${Id}`);
     const data = await response.json();
     const content = data.likemeeps.map((usermeep: meep) => {
       return (

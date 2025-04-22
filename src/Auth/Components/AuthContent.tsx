@@ -2,7 +2,7 @@
 import { FormEvent, useState,useRef,useEffect } from "react"
 import { useStoreAuth } from "./AuthStore";
 import './AuthContent.css'
-
+import { APIURL } from "../../App";
 export default function AuthContent() {
 
     const [loginMode, setLoginMode] = useState(false);
@@ -28,7 +28,6 @@ export default function AuthContent() {
         setLoginMode(!loginMode)
         console.log(isLogin)
     }
-
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
@@ -40,7 +39,7 @@ export default function AuthContent() {
                 formData.append("username",username)
                 formData.append("email",email)
                 formData.append("password",password)
-                const res = await fetch("api/users/createuser", {
+                const res = await fetch(`${APIURL}/api/users/createuser`, {
                     method: "POST", 
                     body: formData
                 })
@@ -64,7 +63,7 @@ export default function AuthContent() {
 
             try {
 
-                const res = await fetch("api/users/login", {
+                const res = await fetch(`${APIURL}/api/users/login`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

@@ -2,6 +2,7 @@ import Divider from "@mui/joy/Divider";
 import "./Notification.css"
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import { useEffect, useState } from "react";
+import { APIURL } from "../../App";
 type notification = {
   id: number;
   senduser: number;
@@ -33,7 +34,7 @@ const [ notifications, setNotifications] = useState<notificationResult>();
           
                   async function getUserFollowing(){
           
-                   const res = await fetch(`api/users/usernotifications/${Id}`)
+                   const res = await fetch(`${APIURL}/api/users/usernotifications/${Id}`)
                    const data =await  res.json()
                    console.log(data.following)
           
@@ -50,7 +51,8 @@ const [ notifications, setNotifications] = useState<notificationResult>();
               return (
 <>
 
-                  <div className="notification-Container">
+                  <div className="notification-Container" key={data.notification.id}>
+                    
                     {`${data.users.username} ${data.notification.action} your meep`}
 
                   </div>
@@ -62,7 +64,7 @@ const [ notifications, setNotifications] = useState<notificationResult>();
             return(
 <>
 
-                  <div className="notification-Container">
+                  <div className="notification-Container" key={data.notification.id}>
                     {`${data.users.username} ${data.notification.action} you`}
 
                   </div>

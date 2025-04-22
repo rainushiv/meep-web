@@ -9,6 +9,7 @@ import OtherUser from "./User/Pages/OtherUser";
 import Chat from "./Chat/Pages/Chat";
 
 function App() {
+
   const isLogin = useStoreAuth((state) => state.isLogin);
   let route;
   if (isLogin) {
@@ -43,3 +44,4 @@ function App() {
 }
 
 export default App;
+export const APIURL = import.meta.env.VITE_API_URL

@@ -4,6 +4,7 @@ import Autocomplete from '@mui/joy/Autocomplete';
 import './SearchBox.css'
 import { Link } from "react-router-dom";
 import OtherUser from "../../User/Pages/OtherUser";
+import { APIURL } from "../../App";
 
 type user = {
     _id: number,
@@ -29,7 +30,7 @@ export default function SearchBox() {
             async function getSearchedUser() {
 
                 try {
-                    const res = await fetch(`api/users/getsearcheduser?username={${value}}`)
+                    const res = await fetch(`${APIURL}/api/users/getsearcheduser?username=${value}`)
                     const data = await res.json()
                     console.log(data.result)
                     setSearchedUser(data.result)
@@ -52,18 +53,9 @@ export default function SearchBox() {
 
 
     }, [value])
-
-                        console.log(searchedUser)
-  
-    return (
-
-        <div className="input-wrapper">
-            <input placeholder="Type to search..." value={value} onChange={(e) => { setValue(e.target.value) }}></input>
-            <div className="suggestion-container">
-
-                {
-
-                     searchedUser && (searchedUser.hits.map((user: user) => {
+ let content
+    if(searchedUser){
+     content = (searchedUser.hits.map((user: user) => {
                         return <div key={user._id}>
                             {
                                  <Link to={`/otheruser/${user._id}`}>
@@ -78,7 +70,19 @@ export default function SearchBox() {
                     }
                     ))
 
-                }
+
+
+    }
+
+    
+     return (
+
+        <div className="input-wrapper">
+            <input placeholder="Type to search..." value={value} onChange={(e) => { setValue(e.target.value) }}></input>
+            <div className="suggestion-container">
+
+   { (searchedUser && content) && content }
+                
             </div>
 
         </div>

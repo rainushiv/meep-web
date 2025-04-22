@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import "./HomeUserCard.css"
 import { useStoreAuth } from '../../Auth/Components/AuthStore';
+import { APIURL } from '../../App';
 
 type userlist = {
     user: user[]
@@ -32,7 +33,7 @@ const [isFollowing,setIsFollowing] = useState<Boolean>(false);
     useEffect(() => {
 
         async function getIfFollowing() {
-            const res = await fetch(`http://localhost:5173/api/users/checkfollowing/${id}`, {
+            const res = await fetch(`${APIURL}/api/users/checkfollowing/${id}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,7 +62,7 @@ const [isFollowing,setIsFollowing] = useState<Boolean>(false);
         try {
 
 console.log(Id,id)
-            const res = await fetch(`http://localhost:5173/api/users/follow/${id}`, {
+            const res = await fetch(`${APIURL}/api/users/follow/${id}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

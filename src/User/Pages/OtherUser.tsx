@@ -11,6 +11,7 @@ import HomeUserCard from "../../Home/Components/HomeUserCard";
 import { useInView } from "react-intersection-observer";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import UserFeed from "../Components/UserFeed";
+import { APIURL } from "../../App";
 
 type propid = {
 
@@ -38,7 +39,7 @@ export default function OtherUser() {
   const Id = useStoreAuth((state) => state.Id);
 
   const getUsers = async ({ pageParam }: { pageParam: number }) => {
-    const response = await fetch(`http://localhost:5173/api/users/getusers?page=${pageParam}`);
+    const response = await fetch(`${APIURL}/api/users/getusers?page=${pageParam}`);
     return await response.json();
   };
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -76,7 +77,7 @@ export default function OtherUser() {
  useEffect(()=>{
 
     async function getFollowing(){
-const res = await fetch(`http://localhost:5173/api/users/${Id}/getcurrentuserfollowing`)
+const res = await fetch(`${APIURL}/api/users/${Id}/getcurrentuserfollowing`)
 const data =res.json()
 
 console.log(data)

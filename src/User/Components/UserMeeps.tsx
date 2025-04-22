@@ -4,6 +4,7 @@ import IconButton from "@mui/joy/IconButton";
 import Favorite from "@mui/icons-material/Favorite";
 import { useState, useEffect } from "react";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import { APIURL } from "../../App";
 
 type meeps = {
   id: number;
@@ -50,7 +51,7 @@ export default function UserMeeps(
 
   async function LikeHandler() {
     const res = await fetch(
-      `http://localhost:5173/api/usermeeps/likemeep/${id}`,
+      `${APIURL}/api/usermeeps/likemeep/${id}`,
       {
         method: "POST",
         headers: {
