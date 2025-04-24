@@ -11,7 +11,7 @@ export default function Header() {
     <>
       <nav className="nav-container">
         <Link className="nav-brand" to={"/home"}>
-          Mimi
+          Meeps
         </Link>
         <SearchBox></SearchBox>
 
