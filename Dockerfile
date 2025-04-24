@@ -7,6 +7,7 @@ WORKDIR /app
 COPY . .
 
 RUN bun install
+RUN bun run build
 
 # Expose the port on which the API will listen
 EXPOSE 5173
