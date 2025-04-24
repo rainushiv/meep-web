@@ -1,3 +1,4 @@
+import Divider from "@mui/joy/Divider"
 import "./RecBar.css"
 
 interface Name{
@@ -13,6 +14,8 @@ return (
 
     <div className="recBar-Container">
 <h3>Reccommended</h3>
+
+        <Divider></Divider>
 {content}
     </div>
 );

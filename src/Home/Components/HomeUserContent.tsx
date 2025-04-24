@@ -22,15 +22,12 @@ export default function HomeUserContent() {
     async function getCurrentUser() {
       // const id = Id;
       // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
-      const res = await fetch(
-        `${APIURL}/api/users/${Id}/getcurrentuser`
-      );
+      const res = await fetch(`${APIURL}/api/users/${Id}/getcurrentuser`);
       const data = await res.json();
       setCurrentUser(data.user[0]);
     }
     getCurrentUser();
   }, []);
-
 
   const meepSubmitHandler = async () => {
     if (!file)
@@ -48,7 +45,7 @@ export default function HomeUserContent() {
         });
 
         setValue("");
-        setPreviewUrl(null)
+        setPreviewUrl(null);
       } catch (err) {
         console.log(err);
       }
@@ -102,7 +99,7 @@ export default function HomeUserContent() {
   }, [file]);
 
   return (
-    <div>
+    <div className="home-Container">
       <div className="image-Container">
         <img
           className="profile-background"
@@ -144,7 +141,9 @@ export default function HomeUserContent() {
                       setValue(e.target.value);
                     }}
                   ></textarea>
-{previewUrl && <img src={previewUrl} className="meepImg-Container"></img>}
+                  {previewUrl && (
+                    <img src={previewUrl} className="meepImg-Container"></img>
+                  )}
                   <div></div>
                   <div className="meepbutton-Container">
                     <IconButton onClick={pickImageHandler}>
@@ -180,8 +179,6 @@ export default function HomeUserContent() {
           </Button>
         </div>
       </div>
-
-      
     </div>
   );
 }

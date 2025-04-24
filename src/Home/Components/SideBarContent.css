@@ -3,6 +3,7 @@
 width: 280px;
 height: 450px;
 margin-left: 20px;
+overflow: scroll;
 margin-top: 20px;
 border-radius: 8px;
 background-color: white;

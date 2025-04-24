@@ -10,6 +10,7 @@ import { useState,useEffect } from 'react';
 import "./HomeUserCard.css"
 import { useStoreAuth } from '../../Auth/Components/AuthStore';
 import { APIURL } from '../../App';
+import Divider from '@mui/joy/Divider';
 
 type userlist = {
     user: user[]
@@ -81,10 +82,11 @@ console.log(res)
 
 
     return (
-        <Card color='neutral' sx={{ width: 265,height:60 }}>
+        <>
+        <div className='homeUserCard-Container' >
 
             <div className='cardcontent-Container'>
-
+<div className='cardinfo-Container'>
                 <Avatar src={avatarUrl}></Avatar>
 
           <Link to={`/otheruser/${id}`}>
@@ -94,7 +96,9 @@ console.log(res)
                
             </div>
 </Link>
-            <div>
+ 
+</div>
+           <div>
                      <Button 
                         variant="solid"
                         size="md"
@@ -111,7 +115,10 @@ console.log(res)
  
             </div>
                
+        </div>
 
-        </Card>
+        <Divider></Divider>
+
+        </>
     );
 }
