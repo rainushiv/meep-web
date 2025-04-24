@@ -40,4 +40,4 @@ jobs:
             git pull 
             cd ..
             cd meep-infra
-            docker compose up --build --force-recreate
+            docker compose up --build 
