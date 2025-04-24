@@ -1,19 +1,17 @@
-
-.homeUserCard-Container{
-    padding: 1rem;
+.homeUserCard-Container {
+  padding: 1rem;
 }
-.homeUserCard-Container:hover{
-    background-color: #EEEEEE;
-    transition: .3s;
+.homeUserCard-Container:hover {
+  background-color: #eeeeee;
+  transition: 0.3s;
 }
 
-.cardcontent-Container{
-
-display: flex;
-justify-content: space-between;
-gap: 5%;
+.cardcontent-Container {
+  display: flex;
+  justify-content: space-between;
+  gap: 5%;
 }
-.cardinfo-Container{
-    display: flex;
-    gap: 10%;
+.cardinfo-Container {
+  display: flex;
+  gap: 10%;
 }
