@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /var/www/meep-site/mimi-web
+            cd /var/www/meep-site/meep-web
             git pull 
             cd ..
             cd meep-infra
