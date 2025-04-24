@@ -141,7 +141,7 @@ export default function HomeUserContent() {
                       setValue(e.target.value);
                     }}
                   ></textarea>
-                  {previewUrl && (
+                  {  previewUrl && (
                     <img src={previewUrl} className="meepImg-Container"></img>
                   )}
                   <div></div>
