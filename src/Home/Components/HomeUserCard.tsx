@@ -86,7 +86,7 @@ console.log(res)
         <div className='homeUserCard-Container' >
 
             <div className='cardcontent-Container'>
-<div className='cardinfo-Container'>
+            <div className='cardinfo-Container'>
                 <Avatar src={avatarUrl}></Avatar>
 
           <Link to={`/otheruser/${id}`}>
@@ -95,9 +95,9 @@ console.log(res)
                 <Typography level="body-sm">@{username}</Typography>
                
             </div>
-</Link>
+            </Link>
  
-</div>
+            </div>
            <div>
                      <Button 
                         variant="solid"
