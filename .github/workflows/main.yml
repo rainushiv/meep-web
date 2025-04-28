@@ -24,6 +24,8 @@ jobs:
           port: 22
           script: |
             cd /var/www/meep-site/meep-web
+            rm -rf dist/
+            bun run build
             git pull 
             cd ..
             cd meep-infra
