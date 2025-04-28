@@ -37,6 +37,7 @@ jobs:
           script: |
             cd /var/www/meep-site/meep-web
             git pull 
+            bun run build
             cd ..
             cd meep-infra
             docker compose up --build 
