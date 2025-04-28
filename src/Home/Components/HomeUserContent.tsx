@@ -107,7 +107,7 @@ export default function HomeUserContent() {
         ></img>
 
         <img
-          className="Homeavatar-Container"
+          className="Homeavatarprofile-Container"
           src={currentUser && currentUser.avatarUrl}
         ></img>
       </div>
