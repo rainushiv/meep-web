@@ -3,9 +3,6 @@ import AttachmentIcon from "@mui/icons-material/Attachment";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import "./UserContent.css";
 import Button from "@mui/joy/Button";
-import Divider from "@mui/joy/Divider";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/joy/IconButton";
 import { APIURL } from "../../App";
 
 type prop = {
@@ -27,7 +24,7 @@ export default function UserContent({Id}:prop) {
       // const id = Id;
       // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
       const res = await fetch(
-        `http://localhost:5173/api/users/${Id}/getcurrentuser`
+        `${APIURL}/api/users/${Id}/getcurrentuser`
       );
       const data = await res.json();
       setCurrentUser(data.user[0]);
@@ -62,7 +59,7 @@ export default function UserContent({Id}:prop) {
       formData.append("creatorId", Id.toString());
       formData.append("image", file);
       try {
-        const res = await fetch("api/usermeeps/createimgmeep", {
+        const res = await fetch(`${APIURL}api/usermeeps/createimgmeep`, {
           method: "POST",
           body: formData,
         });
@@ -113,7 +110,7 @@ const [isFollowing,setIsFollowing] = useState<Boolean>(false);
     useEffect(() => {
 
         async function getIfFollowing() {
-            const res = await fetch(`http://localhost:5173/api/users/checkfollowing/${Id}`, {
+            const res = await fetch(`${APIURL}/api/users/checkfollowing/${Id}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
