@@ -6,8 +6,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . .
 
-RUN bun run build
-
 RUN bun install
 
 # Expose the port on which the API will listen
