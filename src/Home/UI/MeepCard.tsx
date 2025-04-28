@@ -18,7 +18,6 @@ type isLiked =  {
   userId: number
 }
 export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Props) {
-  const [isLoading,setIsLoading] = useState(false)
   const [currentUser, setCurrentUser] = useState<any>();
   const [isLiked, setIsLiked] = useState(false);
 

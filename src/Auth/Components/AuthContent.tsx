@@ -3,6 +3,7 @@ import { FormEvent, useState,useRef,useEffect } from "react"
 import { useStoreAuth } from "./AuthStore";
 import './AuthContent.css'
 import { APIURL } from "../../App";
+import Button from "@mui/joy/Button";
 export default function AuthContent() {
 
     const [loginMode, setLoginMode] = useState(false);
@@ -69,8 +70,8 @@ export default function AuthContent() {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        email: email || "yuhh234@gmail.com",
-                        password: password || "yuhh234",
+                        email: email,
+                        password: password,
                     })
 
 
@@ -93,6 +94,37 @@ export default function AuthContent() {
 
     }
 
+const handleTestSignIn = async ()=>{
+
+            try {
+
+                const res = await fetch(`${APIURL}/api/users/login`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: "yuhh234@gmail.com",
+                        password: "yuhh234",
+                    })
+
+
+                })
+
+                const data = await res.json()
+
+                console.log(data.user[0].id)
+
+                Login(data.user[0].id);
+
+
+
+            } catch (err) {
+                console.log(err)
+            }
+
+
+}
     const filePicker = useRef<HTMLInputElement>(null);
 
   const pickImageHandler =() =>{
@@ -148,7 +180,7 @@ let pickedFile
 
                     }
                 </div>
-                <div>
+                <div className="authInput-Container">
                     {
                         !loginMode && <>
                             <label><b>Name</b></label>
@@ -158,7 +190,7 @@ let pickedFile
                     }
                 </div>
 
-                <div>
+                <div className="authInput-Container">
                     {
                         !loginMode && <>
                             <label><b>Username</b></label>
@@ -167,21 +199,23 @@ let pickedFile
 
                     }
                 </div>
-                <div>
+                <div className="authInput-Container">
                     <label><b>Email</b></label>
                     <input value={email} id="Email" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }}></input>
 
                 </div>
-                <div>
+                <div className="authInput-Container">
                     <label><b>Password</b></label>
                     <input value={password} id="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }}></input>
 
                 </div>
                 <div className="button-container">
-                    <button type="submit">Submit</button>
-                    <button type="button" onClick={modeHandler}>{!loginMode ? "Aleady have an account?" : "Dont have an account?"}</button>
+                    <Button type="submit">Submit</Button>
+                    <Button type="button" onClick={modeHandler}>{!loginMode ? "Aleady have an account?" : "Dont have an account?"}</Button>
                 </div>
-
+<div className="testButton-Container">
+    <Button onClick={handleTestSignIn} >Test Account Sign-In</Button>
+</div>
             </form>
         </div>
     )
