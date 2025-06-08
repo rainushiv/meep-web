@@ -2,4 +2,36 @@
 .homeUserFeed-Container{
 
     height: 80%;
+    width: 46vw;
+}
+.horizontal-Divider{
+
+    border: .5px solid rgb(185, 184, 184);
+    z-index: -1;
+    opacity: .3;
+}
+.userFeedSelector-Container{
+ position: fixed;
+    top: 0px;
+    width: 46vw;
+    z-index: 1;
+  backdrop-filter: blur(10px);  
+}
+.feedSelectButton-Container{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.feedSelectButton-Container button{
+    
+    font-size: 17px;
+    width: 100%;
+
+    height: 40px;
+    border: none;
+    background-color: transparent;
+}
+
+.feedSelectButton-Container button:hover{
+background-color: rgba(158, 157, 157, 0.224);
 }

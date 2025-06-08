@@ -1,5 +1,5 @@
 .sure {
-    color: white;
+    color: black;
 }
 
 .meep-Container {
@@ -26,20 +26,11 @@
 
 
 .homemeep-Container {
-    margin-top: 1%;
-    height: 800px;
-    max-width: fit-content;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 40px;
-    border: solid 1px rgba(246, 233, 233, .35);
-    border-radius: 10px;
-    padding: 10px;
-    overflow: scroll;
-    background-color: white;
+    height: 100%;
+    background-color: black;
+    color: white;
    display: flex;
    flex-direction: column; 
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .user-list {
@@ -54,4 +45,15 @@
 .AllContent-Container{
 
 display: flex;
+height: 1080px;
+}
+.divider{
+
+    border: 5px solid rgb(185, 184, 184);
+    opacity: 1;
+    z-index: -1;
+}
+.sideBar-Placeholder{
+width: 800px;
+height: 100%;
 }

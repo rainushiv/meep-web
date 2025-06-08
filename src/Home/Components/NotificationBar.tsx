@@ -3,6 +3,7 @@ import "./Notification.css"
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import { useEffect, useState } from "react";
 import { APIURL } from "../../App";
+import { Link } from "react-router-dom";
 type notification = {
   id: number;
   senduser: number;
@@ -36,7 +37,7 @@ const [ notifications, setNotifications] = useState<notificationResult>();
           
                    const res = await fetch(`${APIURL}/api/users/usernotifications/${Id}`)
                    const data =await  res.json()
-                   console.log(data.following)
+                   console.log(data)
           
                    setNotifications(data)
           
@@ -50,26 +51,29 @@ const [ notifications, setNotifications] = useState<notificationResult>();
           if(data.notification.action === "liked"){
               return (
 <>
-
+<Link to={`/otheruser/${data.users.id}`}>
                   <div className="notification-Container" key={data.notification.id}>
                     
                     {`${data.users.username} ${data.notification.action} your meep`}
 
                   </div>
+</Link>
 
-                    <Divider></Divider>
+<hr className="horizontal-Divider"/>
  </>
               )
           }else{
             return(
 <>
 
+<Link to={`/otheruser/${data.users.id}`}>
                   <div className="notification-Container" key={data.notification.id}>
-                    {`${data.users.username} ${data.notification.action} you`}
 
+                    {`${data.users.username} ${data.notification.action} you`}
                   </div>
 
-<Divider></Divider>
+</Link>
+<hr className="horizontal-Divider"/>
  
 </>
            )
@@ -80,7 +84,7 @@ const [ notifications, setNotifications] = useState<notificationResult>();
     return (
        <div className="notiBar-Content">
     <h3>Notification</h3>
-<Divider></Divider>
+<hr className="horizontal-Divider"></hr>
 {content}
 </div>
 

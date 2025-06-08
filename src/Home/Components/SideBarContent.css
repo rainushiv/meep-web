@@ -1,18 +1,230 @@
 
 .sideBar-Content{
-width: 280px;
-height: 450px;
-margin-left: 20px;
+width: 22vh;
+height: 100%;
 overflow: scroll;
-margin-top: 20px;
-border-radius: 8px;
-background-color: white;
-color: black;
-
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+background-color: black;
+color: white;
+position: fixed;
+top: 40px;
+left: 90px;
 }
 
-.sideBar-Content h3{
-    padding-top: 20px;
-    padding-left: 90px;
+.sideBar-Content h1{
+    font-size: 30px;
+}
+.navlist{
+    padding-top: 2vh;
+    padding-left: 8vh;
+}
+.navbarLink{
+color: white;
+}
+.navContent{
+    display: inline;
+    font-size: 20px;
+    list-style: none;
+    text-decoration: none;
+}
+.navContent li{
+    margin-top:23px ;
+}
+
+.sideBarPost-Button{
+
+    background-color: white;
+    border: none;
+    color: black;
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 20px;
+    margin-top:8%;
+    margin-left:30%;
+    transition: .4s;
+    cursor: pointer;
+
+}
+.sideBarPost-Button:hover{
+
+    transform: scale(1.04);
+    transition: .4s;
+}
+
+
+
+.darkBG {
+    width: 100vw;
+    height: 1000px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+
+}
+
+.centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:20% ;
+        z-index: 1;
+  }
+
+
+.modal {
+    width: 500px;
+    min-height: 330px;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    z-index: 1;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: fixed;
+    top: 250px;
+    left: 450px;
+    
+}
+
+.modalHeader {
+    height: 50px;
+    background: rgb(22, 22, 22);
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+        z-index: 1;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    margin-left:3% ;
+    margin-right:3% ;
+    padding-top:10px ;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+}
+
+.modalContent {
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    z-index: 0;
+}
+
+
+.modalActions {
+    position: absolute;
+    bottom: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.meep-Input{
+background-color: transparent;
+border: none;
+font-size: 1.25rem;
+margin-left:8px ;
+overflow-wrap: break-word;
+resize: none;
+outline: none;
+height: 190px;
+width: 90%;
+color: white;
+}
+.meep-Input:focus{
+    border: none;
+}
+
+.meepbutton-Container{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin:4% ;
+}
+.meepImg-Container{
+    max-height:200px;
+    max-width: 300px;
+    margin-left: 10%;
+}
+.sidebarActionButton-Container{
+    display: flex;
+    gap: 20px;
+}
+
+
+.userProfile-Banner{
+    padding-top: 10px;
+    padding-left: 15px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid rgba(96, 96, 96, 0.332);
+    border-radius: 6px;
+    width: 20.5%;
+    height: 65px;
+    display: flex;
+transition: .4s;
+}
+.userProfile-Banner:hover{
+    transition: .4s;
+    background-color: rgba(96, 96, 96, 0.332);
+
+}
+.userProfileBanner-Info{
+    display: inline;
+    row-gap: 50px;
+}
+.userProfileBanner-Info p{
+color: #f9f9f99c;
+}
+.popUp-Banner{
+    position: fixed;
+    height: 61  px;
+    width: 21.5%;
+    bottom: 76px;
+    left: 0px;
+    border: 1px solid #f9f9f913;
+    border-top-left-radius:8px ;
+    border-top-right-radius:8px ;
+
+}
+.logout-Container{
+
+width: 97.5%;
+padding-left:8px ;
+height: 60px;
+
+border-radius: 8px;
+
+    transition: .4s;
+}
+
+.logout-Container:hover{
+
+    transition: .4s;
+    background-color: rgba(96, 96, 96, 0.332);
+}
+.changeProfile-Container{
+
+border-radius: 5px;
+padding-left:8px ;
+height: 60px;
+width: 97.5%;
+
+    transition: .4s;
+}
+
+.changeProfile-Container:hover{
+
+    transition: .4s;
+    background-color: rgba(96, 96, 96, 0.332);
 }

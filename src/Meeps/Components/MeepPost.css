@@ -1,0 +1,51 @@
+.meepPostPage-Container{
+
+    height: 80%;
+    width: 86vw;
+    display: flex;
+    margin-top: 60px;
+    overflow: hidden;
+    margin-left: 120px;
+}
+.horizontal-divider{
+
+    border: .5px solid rgb(185, 184, 184);
+
+    opacity: .3;
+}
+.divider{
+
+    border: .5px solid rgb(185, 184, 184);
+    opacity: .3;
+}
+.meepPostAction-Button{
+display: flex;
+justify-content: space-evenly;
+
+
+}
+.meepPostComment-Container{
+    display: flex;
+    margin-top:20px ;
+}
+.meepPostComment-Container textarea {
+
+    height: 30%;
+    width: 27vw;
+    
+
+background-color: transparent;
+border: none;
+font-size: 1.25rem;
+margin-left:8px ;
+overflow-wrap: break-word;
+resize: none;
+outline: none;
+padding: 10px;
+color: white;
+}
+.meepPostComment-Container textarea:focus{
+
+border: none;
+}
+

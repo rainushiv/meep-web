@@ -3,6 +3,7 @@ import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import Divider from "@mui/joy/Divider";
 import MeepCard from "../../Home/UI/MeepCard";
 import { APIURL } from "../../App";
+import "./UserFeed.css"
 
 type meep = {
   id: number;
@@ -11,11 +12,12 @@ type meep = {
   imageUrl:string;
 };
 type props = {
-    Id:string 
+    Id:number 
 }
 export default function UserFeed({Id}:props) {
   const [userFeed, setUserFeed] = useState();
   const [content, setContent] = useState();
+  const [isLoading,setIsLoading] = useState(true);
 
   async function getFeed() {
     const response = await fetch(`${APIURL}/api/usermeeps/usermeepfeed/${Id}`);
@@ -36,11 +38,9 @@ export default function UserFeed({Id}:props) {
     setContent(content);
   }
 
-  useEffect(() => {
-    getFeed();
-  }, []);
-
   async function getUserMeeps() {
+    setIsLoading(true)
+
     const response = await fetch(`${APIURL}/api/usermeeps/getusermeeps/${Id}?page=1`);
     const data = await response.json();
 
@@ -50,13 +50,20 @@ export default function UserFeed({Id}:props) {
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
-          imageUrl={null}
+          imageUrl={usermeep.imageUrl}
           userMeep={true}
         ></MeepCard>
       );
     });
     setContent(content);
+
+    setIsLoading(false)
   }
+  useEffect(() => {
+    getUserMeeps()
+  }, [Id]);
+
+
 
   async function getUserImgMeeps() {
     const response = await fetch(`${APIURL}api/usermeeps/getuserimgmeeps/${Id}`);
@@ -96,13 +103,11 @@ export default function UserFeed({Id}:props) {
   return (
     <>
       <div className="feedbutton-Container">
-        <button onClick={getUserMeeps}> meeps</button>
-        <button onClick={getUserImgMeeps}>imeegs</button>
+        <button autoFocus onClick={getUserMeeps}> meeps</button>
         <button onClick={getUserLikes}>Likes</button>
       </div>
-
-      <Divider></Divider>
-      <div className="UserFeed-Container">{content}</div>
+<hr className="horizontal-Divider"></hr>
+      <div className="UserFeed-Container">{!isLoading && content}</div>
     </>
   );
 }

@@ -1,15 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { APIURL } from "../../App";
-import RecBar from "../../Home/Components/RecBar";
-import SideBarContent from "../../Home/Components/SideBarContent";
+import RecBar from "../../Home/Components/RecBar"
+import SideBarContent from "../../Home/Components/SideBarContent"
+import "./NotificationPage.css"
 import HomeUserCard from "../../Home/Components/HomeUserCard";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
-import './Meeps.css'
-import MeepContent from "../../Home/Components/MeepContent";
-import MeepPost from "../Components/MeepPost";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import IconButton from "@mui/joy/IconButton";
-import { useNavigate } from "react-router-dom";
+import { APIURL } from "../../App";
+import NotificationBar from "../../Home/Components/NotificationBar";
 type user = {
   id: number;
   name: String;
@@ -24,10 +20,10 @@ type users = {
 };
 
 
-export default function Meeps() {
+
+export default function NotificationPage(){
 
   const Id = useStoreAuth((state) => state.Id);
-  const navigate = useNavigate();
   const getUsers = async ({ pageParam }: { pageParam: number }) => {
     const response = await fetch(`${APIURL}/api/users/getusers?page=${pageParam}`);
     return await response.json();
@@ -61,10 +57,8 @@ return (
   );
 
 
-
     return (
-
-        <div className="AllContent-Container">
+    <div className="AllContent-Container">
 
           <SideBarContent></SideBarContent>
         <div className="sideBar-Placeholder">
@@ -73,23 +67,7 @@ return (
         <hr className="divider"></hr>
 
         <div className="homemeep-Container">
-          <div className="backButton-Container">
-            <div className="flexBackButton-Container" onClick={()=>navigate(-1)}>
-            <IconButton sx={[
-                  {
-                    "&:hover": {
-                      color: "white",
-                      backgroundColor: "transparent",
-                    },
-                  },
-                ]}>
-      <ArrowBackIosIcon className="goBack-Button"></ArrowBackIosIcon>
-            </IconButton>
-           <h3>back</h3> 
- 
-            </div>
-         </div>
-            <MeepPost></MeepPost>
+        <NotificationBar></NotificationBar>
         </div>
  
         <hr className="divider"></hr>

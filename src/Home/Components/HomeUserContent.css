@@ -3,7 +3,6 @@ object-fit: fill;
 max-height: 60%;
 
 max-width: 20%;
-position: relative;
 bottom: 50%;
 left: 1%;
 border-radius: 120px;
@@ -75,8 +74,8 @@ margin-top: 1%;
 .modal {
     width: 500px;
     min-height: 330px;
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
     z-index: 0;
     border-radius: 16px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
@@ -105,7 +104,7 @@ margin-top: 1%;
 
 .modalContent {
     font-size: 14px;
-    color: white;
+    color: black;
     text-align: center;
     z-index: 0;
 }

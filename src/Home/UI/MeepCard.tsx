@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import IconButton from "@mui/joy/IconButton";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import { APIURL } from "../../App";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface Props {
   id: number;
   body: string;
@@ -20,10 +23,14 @@ type isLiked =  {
 export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Props) {
   const [currentUser, setCurrentUser] = useState<any>();
   const [isLiked, setIsLiked] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const Token = useStoreAuth((state) => state.Token);
   const userId = useStoreAuth((state) => state.Id);
+  const naviate = useNavigate();
   useEffect(() => {
     async function getCurrentUser() {
+      setIsLoading(true)
       // const id = Id;
       // const url = `http://localhost:3000/api/users/${id}/getcurrentuser`
       const res = await fetch(
@@ -31,9 +38,24 @@ export default function MeepCard({ id, body, imageUrl, creatorId, userMeep }: Pr
       );
       const data = await res.json();
       setCurrentUser(data.user[0]);
+
+      setIsLoading(false)
     }
     getCurrentUser();
   }, []);
+
+  useEffect(()=>{
+async function checkLikeCount(){
+
+  const res = await fetch(`${APIURL}/api/usermeeps/getmeeplikecount/${id}`)
+  const data = await res.json()
+
+  setLikeCount(data.result)
+
+}
+checkLikeCount()
+
+  },[])
 
   useEffect(() => {
     async function checkLike() {
@@ -44,6 +66,7 @@ if(userId){
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+        "Authorization":"Bearer "+Token
           },
           body: JSON.stringify({
             userId: userId,
@@ -62,7 +85,7 @@ if(userId){
 
 }
     checkLike();
-  }, []);
+  }, [isLiked]);
 
   async function LikeHandler() {
 
@@ -73,6 +96,7 @@ if(userId){
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+        "Authorization":"Bearer "+Token
         },
         body: JSON.stringify({
           userId: userId,
@@ -80,24 +104,51 @@ if(userId){
       }
     );
     setIsLiked(true);
+    setLikeCount(likeCount+1)
   }
 }
-  const liked = {};
 
+async function handleUserSelect(){
+
+  naviate(`/otheruser/${currentUser.id}`)
+  
+}
   return (
     <>
+    <Link to={`/meeps/${id}`}>
       <div className="meepfeed-Container">
-        <div className="userinfo-Container">
-          <div className="username-Container">
-            <Avatar
-              size="lg"
+<div className="meepContent-Container" onClick={(e)=>{
+  e.preventDefault()
+  e.stopPropagation()
+  handleUserSelect()}}>
+    <div className="meepuseravatar">
+<Avatar 
+              size="md"
               src={(currentUser && currentUser.avatarUrl) || ""}
             ></Avatar>
-
-            {currentUser && <h4>{currentUser.name}</h4>}
-            {currentUser && <h5>{`@${currentUser.username}`}</h5>}
-          </div>
-          { !userMeep && <div>
+ 
+    </div>
+ <div className="meepBody-Container">
+          <div className="username-Container">
+           
+            {(!isLoading && currentUser) && <h4>{currentUser.name}</h4>}
+            {(!isLoading && currentUser) && <p>{`@${currentUser.username}`}</p>} 
+         </div>
+          <p>{body}</p>
+ 
+  </div>
+ 
+</div>
+      {imageUrl &&
+<div className="meepImages-Container">
+          <img className="meepImage" src={imageUrl}></img>
+        </div>
+ 
+        }
+             </div>
+      <div className="interact-Container"> 
+            
+           <div>
             {isLiked && (
               <IconButton
                 variant="plain"
@@ -110,8 +161,13 @@ if(userId){
                     },
                   },
                 ]}
+                onClick={(e: React.MouseEvent<HTMLButtonElement> )=>{
+
+                  e.preventDefault()
+                  e.stopPropagation()}}
               >
                 <Favorite></Favorite>
+              <p>{likeCount}</p>
               </IconButton>
             )}
 
@@ -127,22 +183,24 @@ if(userId){
                     },
                   },
                 ]}
-                onClick={LikeHandler}
+                onClick={(e)=>{
+
+                  e.preventDefault()
+                  e.stopPropagation()
+                  LikeHandler()}}
               >
                 <FavoriteBorder></FavoriteBorder>
+              <p className="likeCount">{likeCount}</p>
               </IconButton>
             )}
-          </div>}
-        </div>
-        <div className="meepcontent-Container">
-          <p>{body}</p>
-        </div>
-        <div className="meepImages-Container">
-          {imageUrl && <img className="meepImage" src={imageUrl}></img>}
-        </div>
-      </div>
+          </div>
+          <IconButton>
 
-      <Divider></Divider>
+            <ChatBubbleOutlineOutlinedIcon></ChatBubbleOutlineOutlinedIcon>
+          </IconButton>
+      </div>
+</Link>
+<hr className="horizontal-Divider"></hr>
     </>
   );
 }

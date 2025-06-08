@@ -49,7 +49,7 @@ export default function AuthContent() {
 
                 console.log(data.user)
 
-                Login(data.user)
+                Login(data.userId, data.token)
 
             }
             catch (err) {
@@ -79,9 +79,9 @@ export default function AuthContent() {
 
                 const data = await res.json()
 
-                console.log(data.user[0].id)
+                console.log(data.userId)
 
-                Login(data.user[0].id);
+                Login(data.userId,data.token);
 
 
 
@@ -104,8 +104,8 @@ const handleTestSignIn = async ()=>{
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        email: "yuhh234@gmail.com",
-                        password: "yuhh234",
+                        email: "sad567@gmail.com",
+                        password: "Buttpoop123",
                     })
 
 
@@ -113,9 +113,9 @@ const handleTestSignIn = async ()=>{
 
                 const data = await res.json()
 
-                console.log(data.user[0].id)
+                console.log(data)
 
-                Login(data.user[0].id);
+                Login(data.userId,data.token);
 
 
 

@@ -1,0 +1,79 @@
+.sure {
+    color: black;
+}
+
+.meep-Container {
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+.input-Container {
+    width: 100%;
+
+}
+
+.textArea {
+    resize: none;
+
+}
+
+.title-Container {
+    width: 100%;
+}
+
+
+.homemeep-Container {
+    height: 100%;
+    width: 46vw;
+    background-color: black;
+    color: white;
+   display: flex;
+   flex-direction: column; 
+}
+
+.user-list {
+
+    display: flex;
+    flex-direction: row;
+}
+.ref-div{
+    width: 300px;
+    height: 30px;
+}
+.AllContent-Container{
+
+display: flex;
+height: 200%;
+}
+.divider{
+
+    border: .5px solid rgb(185, 184, 184);
+    opacity: .15;
+}
+.sideBar-Placeholder{
+width: 38vh;
+height: 100%;
+}
+.backButton-Container{
+
+position: fixed;
+width: 45.4vw;
+padding-left: 10px;
+
+padding-top: 10px;
+
+  backdrop-filter: blur(10px);  
+  z-index: 1;
+}
+
+.flexBackButton-Container{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.goBack-Button{
+    color: white;
+}

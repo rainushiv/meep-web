@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import AttachmentIcon from "@mui/icons-material/Attachment";
+import CloseIcon from "@mui/icons-material/Close";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import "./HomeUserContent.css";
 import Button from "@mui/joy/Button";
 import Divider from "@mui/joy/Divider";
-import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/joy/IconButton";
 import { APIURL } from "../../App";
 export default function HomeUserContent() {
@@ -17,6 +17,7 @@ export default function HomeUserContent() {
     null
   );
   const Id = useStoreAuth((state) => state.Id);
+  const Token = useStoreAuth((state) => state.Token);
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -36,6 +37,7 @@ export default function HomeUserContent() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization":"Bearer "+Token
           },
           body: JSON.stringify({
             title: null,
@@ -58,6 +60,9 @@ export default function HomeUserContent() {
         const res = await fetch(`${APIURL}/api/usermeeps/createimgmeep`, {
           method: "POST",
           body: formData,
+          headers:{
+            "Authorization":"Bearer "+Token
+          }
         });
         setValue("");
         setPreviewUrl(null);
@@ -146,7 +151,7 @@ export default function HomeUserContent() {
                   )}
                   <div></div>
                   <div className="meepbutton-Container">
-                    <IconButton onClick={pickImageHandler}>
+                    <IconButton  onClick={pickImageHandler}>
                       <AttachmentIcon></AttachmentIcon>
                     </IconButton>
 

@@ -5,7 +5,7 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./HomeUserCard.css";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
@@ -25,14 +25,17 @@ type user = {
 
 export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
   const [isFollowing, setIsFollowing] = useState<Boolean>(false);
+  const Token = useStoreAuth((state) => state.Token)
   const Id = useStoreAuth((state) => state.Id);
 
   useEffect(() => {
     async function getIfFollowing() {
+
       const res = await fetch(`${APIURL}/api/users/checkfollowing/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+        "Authorization":"Bearer "+Token
         },
         body: JSON.stringify({
           profileId: Id,
@@ -46,10 +49,9 @@ export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
       } else if (follower !== 0) {
         setIsFollowing(true);
       }
-      console.log(isFollowing);
     }
     getIfFollowing();
-  }, []);
+  },[]);
 
   async function followUserHandler() {
     try {
@@ -58,6 +60,7 @@ export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+        "Authorization":"Bearer "+Token
         },
         body: JSON.stringify({
           profileId: Id,
@@ -78,34 +81,24 @@ export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
           <div className="cardinfo-Container">
             <Avatar src={avatarUrl}></Avatar>
 
-            <Link to={`/otheruser/${id}`}>
-              <div>
+            <Link to={`http://localhost:5173/otheruser/${id}`}>
+              <div className="testing-something">
                 <Typography level="title-lg">{name}</Typography>
                 <Typography level="body-sm">@{username}</Typography>
               </div>
             </Link>
           </div>
           <div>
-            <Button
-              variant="solid"
-              size="md"
-              color="primary"
-              aria-label="Explore Bahamas Islands"
-              sx={{
-                ml: "auto",
-                alignSelf: "center",
-                fontWeight: 600,
-                marginTop: 2,
-              }}
+            <button
+            className="follow-Button" 
               onClick={followUserHandler}
             >
               {isFollowing ? "Following" : "Follow"}
-            </Button>
+            </button>
           </div>
         </div>
       </div>
 
-      <Divider></Divider>
     </>
   );
 }

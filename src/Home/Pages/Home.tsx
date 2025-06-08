@@ -14,7 +14,7 @@ import SideBarContent from "../Components/SideBarContent";
 import RecBar from "../Components/RecBar";
 import HomeUserFeed from "../Components/HomeUserFeed";
 import NotificationBar from "../Components/NotificationBar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { APIURL } from "../../App";
 
 type user = {
@@ -69,13 +69,14 @@ return (
     })
   );
 
-  const { ref, inView } = useInView();
+//   const { ref, inView } = useInView();
 
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
- }, [fetchNextPage, inView]);
+//   useEffect(() => {
+    
+//     if (inView && hasNextPage) {
+//       fetchNextPage();
+//     }
+//  }, [fetchNextPage, inView]);
 
  useEffect(()=>{
 
@@ -88,26 +89,25 @@ console.log(data)
     }
  },[])
 
+      //<Header />
   return (
-    <>
-      <Header />
       <div className="AllContent-Container">
-        <div className="Side-Bar">
-            <NotificationBar></NotificationBar>
 
-          <SideBarContent name="following"></SideBarContent>
+          <SideBarContent></SideBarContent>
+        <div className="sideBar-Placeholder">
+
         </div>
-        <div className="homemeep-Container">
+        <hr className="divider"></hr>
 
-          <HomeUserContent></HomeUserContent>
+        <div className="homemeep-Container">
+        <MeepContent></MeepContent>
           <HomeUserFeed></HomeUserFeed>
         </div>
+ 
+        <hr className="divider"></hr>
 
-        <div>
           <RecBar content={content}></RecBar>
-        </div>
       </div>
-    </>
   );
   /* <ul className='user-list'>
 

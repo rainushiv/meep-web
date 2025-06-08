@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Header from "../../Shared/Components/Header"
 import UserContent from "../Components/UserContent";
 import { useEffect, useState } from "react";
@@ -12,7 +12,9 @@ import { useInView } from "react-intersection-observer";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import UserFeed from "../Components/UserFeed";
 import { APIURL } from "../../App";
-
+import UserCard from "../../Shared/Components/UserCard";
+import IconButton from "@mui/joy/IconButton";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 type propid = {
 
     propId: string;
@@ -35,9 +37,11 @@ export default function OtherUser() {
  const [userData, setUserData] = useState<any>(null);
   const [users, setUser] = useState<any>(null);
   const [meeps, setMeeps] = useState();
-
   const Id = useStoreAuth((state) => state.Id);
 
+  const navigate = useNavigate();
+    const userid = useParams().uid;
+    const userId = +userid!;
   const getUsers = async ({ pageParam }: { pageParam: number }) => {
     const response = await fetch(`${APIURL}/api/users/getusers?page=${pageParam}`);
     return await response.json();
@@ -83,31 +87,47 @@ const data =res.json()
 console.log(data)
 
     }
- },[])
+ },[userid])
 
 
 
-    const userid = useParams().uid;
 
           //<HomeUserFeed></HomeUserFeed>
     return (
-        <>
-      <Header />
-      <div className="AllContent-Container">
-        <div className="Side-Bar">
-            <NotificationBar></NotificationBar>
+        <div className="AllContent-Container">
 
-          <SideBarContent name="following"></SideBarContent>
+          <SideBarContent></SideBarContent>
+        <div className="sideBar-Placeholder">
+
         </div>
+        <hr className="divider"></hr>
+
         <div className="homemeep-Container">
+<div className="backButton-Container">
+            <div className="flexBackButton-Container" onClick={()=>navigate(-1)}>
+            <IconButton sx={[
+                  {
+                    "&:hover": {
+                      color: "white",
+                      backgroundColor: "transparent",
+                    },
+                  },
+                ]}>
+      <ArrowBackIosIcon className="goBack-Button"></ArrowBackIosIcon>
+            </IconButton>
+           <h3>back</h3> 
+ 
+            </div>
+         </div>
+ 
+           <UserCard Id={userId} isUser={false}></UserCard>
+            <UserFeed Id={userId}></UserFeed>
 
-          { userid && <UserContent Id={userid}></UserContent>}
-        {userid && <UserFeed Id={userid}></UserFeed>}
-        </div>
-
+      </div>
+      <hr className="divider"/>
         <div>
           <RecBar content={content}></RecBar>
         </div>
       </div>
-    </>)
+    )
 }

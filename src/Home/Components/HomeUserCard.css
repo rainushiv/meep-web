@@ -1,9 +1,12 @@
 .homeUserCard-Container {
-  padding: 1rem;
-
+  padding-top:1rem;
+  padding-bottom:1rem;
+  padding-right:3.3rem;
+  padding-left:3.3rem;
+  border-radius: 8px;
 }
 .homeUserCard-Container:hover {
-  background-color: #eeeeee;
+  background-color: rgb(37, 37, 37);
   transition: 0.3s;
 }
 .cardcontent-Container {
@@ -14,4 +17,15 @@
 .cardinfo-Container {
   display: flex;
   gap: 10%;
+}
+.testing-something p {
+
+  color: white;
+}
+.follow-Button{
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 136, 255);
+  font-size:15px;
+  font-weight: 500; 
 }
