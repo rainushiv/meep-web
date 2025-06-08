@@ -110,7 +110,7 @@ if(userId){
 
 async function handleUserSelect(){
 
-  naviate(`/otheruser/${currentUser.id}`)
+  naviate(`${APIURL}/otheruser/${currentUser.id}`)
   
 }
   return (

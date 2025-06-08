@@ -81,7 +81,7 @@ export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
           <div className="cardinfo-Container">
             <Avatar src={avatarUrl}></Avatar>
 
-            <Link to={`http://localhost:5173/otheruser/${id}`}>
+            <Link to={`/otheruser/${id}`}>
               <div className="testing-something">
                 <Typography level="title-lg">{name}</Typography>
                 <Typography level="body-sm">@{username}</Typography>
