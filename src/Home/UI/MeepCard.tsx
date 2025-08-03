@@ -107,10 +107,30 @@ if(userId){
     setLikeCount(likeCount+1)
   }
 }
+async function unlikeHandler(){
+ if(userId){
+    const res = await fetch(
+      `${APIURL}/api/usermeeps/unlikemeep/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        "Authorization":"Bearer "+Token
+        },
+        body: JSON.stringify({
+          userId: userId,
+        }),
+      }
+    );
+    setIsLiked(false);
+    setLikeCount(likeCount-1)
+  }
+
+}
 
 async function handleUserSelect(){
 
-  naviate(`${APIURL}/otheruser/${currentUser.id}`)
+  naviate(`/otheruser/${currentUser.id}`)
   
 }
   return (
@@ -164,7 +184,9 @@ async function handleUserSelect(){
                 onClick={(e: React.MouseEvent<HTMLButtonElement> )=>{
 
                   e.preventDefault()
-                  e.stopPropagation()}}
+                  e.stopPropagation()
+                  unlikeHandler()
+                }}
               >
                 <Favorite></Favorite>
               <p>{likeCount}</p>

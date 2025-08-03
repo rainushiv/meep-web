@@ -1,4 +1,5 @@
 import Divider from "@mui/joy/Divider"
+import SearchBox from "../../Shared/Components/SearchBox"
 import "./RecBar.css"
 
 interface Name{
@@ -13,6 +14,7 @@ export default function RecBar( {content}:Content){
 return (
 
     <div className="recBar-Container">
+        <SearchBox></SearchBox>
 <h3>Reccommended</h3>
 
         <Divider></Divider>

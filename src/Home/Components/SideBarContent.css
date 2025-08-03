@@ -6,7 +6,7 @@ overflow: scroll;
 background-color: black;
 color: white;
 position: fixed;
-top: 40px;
+top: 24px;
 left: 90px;
 }
 
@@ -14,11 +14,13 @@ left: 90px;
     font-size: 30px;
 }
 .navlist{
-    padding-top: 2vh;
-    padding-left: 8vh;
+    padding-top: 1vh;
+    padding-left: 5vh;
 }
 .navbarLink{
 color: white;
+
+    text-decoration: none;
 }
 .navContent{
     display: inline;
@@ -40,8 +42,8 @@ color: white;
     padding-left: 40px;
     padding-right: 40px;
     border-radius: 20px;
-    margin-top:8%;
-    margin-left:30%;
+    margin-top:10%;
+    margin-left:3vh;
     transition: .4s;
     cursor: pointer;
 
@@ -173,6 +175,7 @@ color: white;
     height: 65px;
     display: flex;
 transition: .4s;
+gap: 10px;
 }
 .userProfile-Banner:hover{
     transition: .4s;

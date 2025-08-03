@@ -8,6 +8,9 @@ import User from "./User/Pages/User";
 import OtherUser from "./User/Pages/OtherUser";
 import Chat from "./Chat/Pages/Chat";
 import NotificationPage from "./Notification/Pages/NotificationPage";
+import UserFollower from "./User/Pages/UserFollower";
+import UserFollowing from "./User/Pages/UserFollowing";
+import AuthVerify from "./Auth/Pages/AuthVerify";
 
 function App() {
 
@@ -20,6 +23,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/meeps/:uid" element={<Meeps />} />
         <Route path="/profile" element={<User />} />
+        <Route path="/userFollowing/:uid" element = {<UserFollowing/>}/>
+        <Route path="/userFollower/:uid" element = {<UserFollower/>}/>
         <Route path="/notification" element={<NotificationPage/>}/>
         <Route path="/otheruser/:uid" element={<OtherUser />} />
         <Route path="/auth" element={<Navigate to="/home" />} />
@@ -31,6 +36,7 @@ function App() {
         <Route index element={<Auth />} />
         <Route path="/*" element={<Navigate to="/Auth" />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/authverify" element={<AuthVerify />} />
       </>
     );
   }

@@ -88,3 +88,36 @@ align-items: center;
 .modalProfileHeader{
     z-index: 1;
 }
+.userFollowers-Container{
+
+    display: flex;
+    gap: 9px;
+}
+.userFollowers{
+display: flex;
+
+    gap: 7px;
+}
+.userFollowing{
+display: flex;
+gap: 7px;
+
+}
+
+.Followers-Text{
+    color: gray;
+    cursor: pointer;
+}
+.Following-Text{
+    color: gray;
+    cursor: pointer;
+}
+
+.Following-Number{
+
+    font-weight: bold;
+}
+
+.Followers-Number{
+    font-weight: bold;
+}

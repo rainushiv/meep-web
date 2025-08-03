@@ -40,6 +40,7 @@ export default function MeepPost() {
   const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>(
     null
   );
+const [likeCount,setLikeCount] = useState(0)
 const [meepComments, setMeepComments] = useState<meepComments>()
 const [isLiked, setIsLiked] = useState(false)   
   const uid = useParams();
@@ -51,7 +52,7 @@ const [isLiked, setIsLiked] = useState(false)
     async function getmeep() {
       setIsLoading(true);
       const result = await fetch(
-        `http://localhost:5173/api/usermeeps/getusermeep/${uid.uid}`
+        `${APIURL}/api/usermeeps/getusermeep/${uid.uid}`
       );
       const data = await result.json();
 
@@ -62,6 +63,18 @@ const [isLiked, setIsLiked] = useState(false)
     getmeep();
   }, []);
 
+  useEffect(()=>{
+async function checkLikeCount(){
+
+  const res = await fetch(`${APIURL}/api/usermeeps/getmeeplikecount/${uid.uid}`)
+  const data = await res.json()
+
+  setLikeCount(data.result)
+
+}
+checkLikeCount()
+
+  },[])
   useEffect(() => {
     async function getCurrentUser() {
       setIsLoading(true);
@@ -138,6 +151,7 @@ if(userId){
       }
     );
     setIsLiked(true);
+    setLikeCount(likeCount +1)
   }
 }
 
@@ -194,6 +208,7 @@ if(userId){
             Authorization: "Bearer " + Token,
           },
         });
+
 
         setTitle("");
         setSubject("");
@@ -295,6 +310,7 @@ setMeepComments(data)
                   e.stopPropagation()}}
               >
                 <Favorite></Favorite>
+                <p>{likeCount}</p>
               </IconButton>
             )}
 
@@ -317,6 +333,7 @@ setMeepComments(data)
                   LikeHandler()}}
               >
                 <FavoriteBorder></FavoriteBorder>
+                <p className="likeCount">{likeCount}</p>
               </IconButton>
             )}
           </div>

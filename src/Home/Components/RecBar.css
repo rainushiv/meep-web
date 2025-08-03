@@ -5,7 +5,6 @@ max-height: 60%;
 background-color: black;
 color: white;
 overflow: scroll;
-position: fixed; 
 top:20px;
 right: 80px;
 }

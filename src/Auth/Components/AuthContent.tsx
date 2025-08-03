@@ -4,6 +4,7 @@ import { useStoreAuth } from "./AuthStore";
 import './AuthContent.css'
 import { APIURL } from "../../App";
 import Button from "@mui/joy/Button";
+import { useNavigate } from "react-router-dom";
 export default function AuthContent() {
 
     const [loginMode, setLoginMode] = useState(false);
@@ -24,6 +25,7 @@ export default function AuthContent() {
     const name = useStoreAuth((state) => state.Name)
     const password = useStoreAuth((state) => state.Password)
     const Id = useStoreAuth((state) => state.Id)
+    let navigate = useNavigate()
     const modeHandler = () => {
 
         setLoginMode(!loginMode)
@@ -61,7 +63,6 @@ export default function AuthContent() {
         }
 
         else if (loginMode) {
-
             try {
 
                 const res = await fetch(`${APIURL}/api/users/login`, {
@@ -80,6 +81,19 @@ export default function AuthContent() {
                 const data = await res.json()
 
                 console.log(data.userId)
+                try{
+                    const res = await fetch(`${APIURL}/api/users/${data.userId}/getcurrentuser`)
+                    const user = await res.json()
+
+                    if( true){
+                        navigate
+                    }
+
+                    console.log(user)
+                }catch(err){
+                    console.log(err)
+                }
+
 
                 Login(data.userId,data.token);
 
@@ -114,8 +128,18 @@ const handleTestSignIn = async ()=>{
                 const data = await res.json()
 
                 console.log(data)
+                    const result = await fetch(`${APIURL}/api/users/${data.userId}/getcurrentuser`)
+                    const user = await result.json()
+                    if( true){
+                        navigate("/authverify")
+                    }else{
 
-                Login(data.userId,data.token);
+                    Login(data.userId,data.token);
+                    }
+
+
+                    console.log(user)
+
 
 
 

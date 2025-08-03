@@ -1,10 +1,11 @@
 import { JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from "react"
 import Autocomplete from '@mui/joy/Autocomplete';
-
+import SearchUserCard from "./SearchUserCard";
 import './SearchBox.css'
 import { Link } from "react-router-dom";
 import OtherUser from "../../User/Pages/OtherUser";
 import { APIURL } from "../../App";
+import User from "../../User/Pages/User";
 
 type user = {
     _id: number,
@@ -40,10 +41,6 @@ export default function SearchBox() {
 
                 }
 
-
-
-
-
             }
             getSearchedUser()
 
@@ -53,17 +50,15 @@ export default function SearchBox() {
 
 
     }, [value])
- let content
+
+
+    let content;
     if(searchedUser){
      content = (searchedUser.hits.map((user: user) => {
                         return <div key={user._id}>
                             {
                                  <Link to={`/otheruser/${user._id}`}>
-                                    <div className="row-container">
-
-                                        <p>{user._source.username}</p>
-                                    </div>
-
+                                    <SearchUserCard userId={user._id} ></SearchUserCard>
                                 </Link>
                             }
                         </div>
@@ -73,12 +68,28 @@ export default function SearchBox() {
 
 
     }
+    // if(searchedUser){
+    //  content = (searchedUser.hits.map((user: user) => {
+    //                     return <div key={user._id}>
+    //                         {
+    //                              <Link to={`/otheruser/${user._id}`}>
+    //                                 <div className="row-container">
+
+    //                                     <p>{user._source.username}</p>
+    //                                 </div>
+
+    //                             </Link>
+    //                         }
+    //                     </div>
+    //                 }
+    //                 ))
+    // }
 
     
      return (
 
         <div className="input-wrapper">
-            <input placeholder="Type to search..." value={value} onChange={(e) => { setValue(e.target.value) }}></input>
+            <input placeholder="Type to Search..." value={value} onBlur={(e) =>{setValue("")}} onChange={(e) => { setValue(e.target.value) } }></input>
             <div className="suggestion-container">
 
    { (searchedUser && content) && content }

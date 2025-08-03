@@ -4,6 +4,7 @@
   padding-right:3.3rem;
   padding-left:3.3rem;
   border-radius: 8px;
+
 }
 .homeUserCard-Container:hover {
   background-color: rgb(37, 37, 37);
@@ -18,9 +19,18 @@
   display: flex;
   gap: 10%;
 }
+.cardinfo-Container a {
+  text-decoration: none;
+}
 .testing-something p {
 
   color: white;
+  list-style: none;
+  text-decoration: none;
+}
+.testing-something{
+
+  text-decoration: none;
 }
 .follow-Button{
   background-color: transparent;

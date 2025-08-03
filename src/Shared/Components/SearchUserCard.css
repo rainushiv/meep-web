@@ -1,0 +1,33 @@
+
+
+.userSearch-Container {
+    
+    display: flex;
+    gap: 8px;
+    padding:10px ;
+    transition: .3s;
+    border-radius: 8px;
+
+}
+.userSearch-Container:hover {
+    
+    background-color: rgb(78, 78, 78);
+    
+
+}
+.userSearch-Container img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.userSearch-Name{
+color: white;
+font-size: 18px;
+}
+.userSearch-Username{
+
+color: rgb(159, 159, 159);
+font-size: 13px;
+}
+

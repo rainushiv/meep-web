@@ -9,16 +9,23 @@ import IconButton from "@mui/joy/IconButton";
 import AttachmentIcon from "@mui/icons-material/Attachment";
 import CloseIcon from "@mui/icons-material/Close";
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
+import { useStoreAuth } from "../../Auth/Components/AuthStore";
+import { Link } from "react-router-dom";
 type props = {
   Id: number;
   isUser: boolean;
 };
 
 export default function UserCard({ Id, isUser }: props) {
+
+  const currentuserId = useStoreAuth((state) => state.Id);
   const [currentUser, setCurrentUser] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
 const [isBannerChange, setIsBannerChange]= useState(false)
+const [followerCount,setFollowerCount] = useState<number>()
+const [followingCount,setFollowingCount] = useState<number>()
   const [isOpenModal,setIsOpenModal] = useState(false)
 const [file, setFile] = useState<File>();
 const[isValid, setIsValid] = useState(false)
@@ -36,6 +43,60 @@ else{
 
 }
   },[isOpenModal])
+
+  useEffect(()=>{
+    async function getFollowing(){
+
+const res = await fetch(`${APIURL}/api/users/followingcount/${Id}`)
+const data = await res.json()
+
+console.log(data.result)
+
+setFollowingCount(data.result)
+    }
+    getFollowing()
+  },[Id])
+
+  useEffect(()=>{
+
+    async function getFollowers(){
+const res = await fetch(`${APIURL}/api/users/followercount/${Id}`)
+const data = await res.json()
+console.log(data.result)
+setFollowerCount(data.result)
+}
+getFollowers()
+  },[Id])
+
+
+
+  useEffect(()=>{
+
+    async function checkfollowing() {
+      const res = await fetch(`${APIURL}/api/users/checkfollowing/${Id}`, {
+        method:"POST",
+        headers:{"Content-Type": "application/json"},
+
+      body:JSON.stringify({profileId: currentuserId})
+      })
+const data = await res.json();
+
+      const follower = data.following[0];
+      console.log(follower)
+      if (follower === undefined || follower.length === 0) {
+        setIsFollowing(false);
+      } else if (follower !== 0) {
+        setIsFollowing(true);
+      }
+    }
+if(!isUser){
+
+    checkfollowing();
+}
+
+  },[Id])
+  
+
   useEffect(() => {
     async function getCurrentUser() {
       setIsLoading(true);
@@ -127,6 +188,25 @@ async function changeBanner(){
             <div>
               <h3>{currentUser && currentUser.name}</h3>
               <p>{currentUser && `@${currentUser.username}`}</p>
+              <div className="userFollowers-Container">
+                <div className="userFollowers">
+
+                <Link to={`/userFollower/${Id}`}>
+                <p className="Followers-Text">{`Followers`}</p>
+
+</Link>
+                <p className="Followers-Number">{`${followerCount}`}</p>
+                </div>
+                <div className="userFollowing">
+
+                <Link to={`/userFollowing/${Id}`}>
+                <p className="Following-Text" >{`Following`}</p>
+
+</Link>
+                <p className="Following-Number">{`${followingCount}`}</p>
+                </div>
+
+              </div>
             </div>
             {isUser && (
               <div>
@@ -224,7 +304,7 @@ async function changeBanner(){
             )}
             {!isUser && (
               <div className="FollowButton-Container">
-                <Button>Follow</Button>
+                <Button>{isFollowing ? "Following" : "Follow"}</Button>
               </div>
             )}
           </div>

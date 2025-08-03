@@ -22,6 +22,7 @@ export default function CommentPost({ id,body,creatorId,imageUrl}:props){
 const [meepCommentUser,setMeepCommentUser] = useState<any>();
 const [isLoading,setIsLoading] = useState(false);
 const [isLiked, setIsLiked] = useState(false);
+const [meepCommentLikeCount,setMeepCommentLikeCount] = useState(0)
 
   const Id = useStoreAuth((state) => state.Id);
  useEffect(()=>{
@@ -40,6 +41,18 @@ setIsLiked(true)
 checkCommentLike();
  },[])
 
+  useEffect(()=>{
+async function checkMeepLikeCount(){
+
+  const res = await fetch(`${APIURL}/api/usermeeps/getmeepcommentlikecount/${id}`)
+  const data = await res.json()
+
+  setMeepCommentLikeCount(data.result)
+
+}
+checkMeepLikeCount()
+
+  },[])
 async function likeCommentHandler(){
 
   const result = await fetch(`${APIURL}/api/usermeeps/likecomment/${id}`,{
@@ -79,21 +92,7 @@ getUser();
            
             {(!isLoading && meepCommentUser) && <h4>{meepCommentUser.name}</h4>}
             {(!isLoading && meepCommentUser) && <p>{`@${meepCommentUser.username}`}</p>} 
-         </div>
-          <p>{body}</p>
- 
-  </div>
- 
-</div>
-      {imageUrl &&
-<div className="meepCommentImages-Container">
-          <img className="meepCommentImage" src={imageUrl}></img>
-        </div>
- 
-        }
-             </div>
-      <div className="interact-Container"> 
-             <div>
+ <div className="meepCommentLike-Container">
             {isLiked && (
               <IconButton
                 variant="plain"
@@ -112,6 +111,7 @@ getUser();
                   e.stopPropagation()}}
               >
                 <Favorite></Favorite>
+                  <p>{meepCommentLikeCount}</p>
               </IconButton>
             )}
 
@@ -134,11 +134,27 @@ getUser();
                   likeCommentHandler()}}
               >
                 <FavoriteBorder></FavoriteBorder>
+                  <p>{meepCommentLikeCount}</p>
               </IconButton>
             )}
           </div>
+         </div>
+          <p>{body}</p>
+ 
+  </div>
+ 
+</div>
+      {imageUrl &&
+<div className="meepCommentImages-Container">
+          <img className="meepCommentImage" src={imageUrl}></img>
+        </div>
+ 
+        }
+             </div>
+      <div className="interact-Container"> 
+            
       </div> 
-      <Divider></Divider>
+      <hr className="horizontal-Divider"/>
 </>
     )
 }

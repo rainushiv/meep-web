@@ -1,0 +1,23 @@
+.followingList-Button {
+    margin-top: 50px;
+    display: flex;
+
+        justify-content: space-evenly;
+}
+    
+.followingList-Button button {
+        background-color: transparent;
+         border: none;
+        width: 100%;
+        height: 50px;
+        color: white;
+    
+        font-size: large;
+    }
+    .followingList-Button button:hover{
+    
+    background-color:rgba(109, 108, 108, 0.494);
+        transition: 1s;
+        border: none;
+    }
+ 

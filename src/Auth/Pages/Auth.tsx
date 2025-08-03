@@ -4,7 +4,6 @@ import AuthContent from "../Components/AuthContent"
 export default function Auth() {
     return (
         <>
-            <Header></Header>
             <AuthContent></AuthContent>
         </>
     )

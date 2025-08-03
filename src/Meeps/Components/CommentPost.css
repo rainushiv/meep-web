@@ -40,7 +40,7 @@ border-radius: 20px;
 
     display: flex;
     justify-content:space-between ;
-    margin-bottom:20px ;
+    margin-bottom:13px ;
 }
 .meepCommentContent-Container{
     display: flex;
@@ -53,4 +53,7 @@ border-radius: 20px;
 .meepCommentBody-Container p {
     margin-top: 2px;
 color: white;
+}
+.meepCommentLike-Container{
+    margin-left: 240px;
 }

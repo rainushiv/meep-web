@@ -44,10 +44,9 @@ border-radius: 20px;
 .interact-Container{
 
     display: flex;
-    justify-content:space-between ;
-    margin-top: 30px;
-    margin-left:105px ;
-    margin-right:105px ;
+    margin-top: 10px;
+    margin-left:120px ;
+    margin-right:120px ;
 }
 .meepContent-Container{
     display: flex;

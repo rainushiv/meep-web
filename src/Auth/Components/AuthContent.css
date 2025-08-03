@@ -1,16 +1,17 @@
 .auth-container {
 
-    margin-top: 50px;
+    margin-top: 80px;
     max-width: fit-content;
     margin-inline: auto;
-    background-color: white;
+    background-color: rgb(30, 30, 30);
     padding: 30px;
     border-radius: 14px;
     
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .auth-container input{
-    background-color: white;
+    background-color: rgb(255, 254, 254);
+    color: black;
 }
 .button-container {
     display: flex;
