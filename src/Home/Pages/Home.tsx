@@ -16,6 +16,7 @@ import HomeUserFeed from "../Components/HomeUserFeed";
 import NotificationBar from "../Components/NotificationBar";
 import { Link, useParams } from "react-router-dom";
 import { APIURL } from "../../App";
+import { id } from "zod/v4/locales";
 
 type user = {
   id: number;
@@ -55,7 +56,7 @@ export default function Home() {
 return (
         <div>
       <HomeUserCard
-          key={user.id}
+            key={user.id}
             id={user.id}
             name={user.name}
             username={user.username}
@@ -91,6 +92,7 @@ console.log(data)
 
       //<Header />
   return (
+    <>
       <div className="AllContent-Container">
 
           <SideBarContent></SideBarContent>
@@ -99,15 +101,28 @@ console.log(data)
         </div>
         <hr className="divider"></hr>
 
-        <div className="homemeep-Container">
+        <div className="homeMeep-Container">
         <MeepContent></MeepContent>
+        <hr className="homeFeed-Divider"/>
+
           <HomeUserFeed></HomeUserFeed>
+
         </div>
  
         <hr className="divider"></hr>
+        <div>
 
           <RecBar content={content}></RecBar>
-      </div>
+
+        </div>
+<div className="chatButton-Container">
+
+          <Link to={`/chat/inbox`}><button className="chat-Button">Messages</button></Link>
+ 
+</div>
+     </div>
+
+</>
   );
   /* <ul className='user-list'>
 

@@ -1,4 +1,18 @@
 .chat-Container{
 
     display: flex;
+    overflow-y: hidden;
+}
+.chat-Divider{
+        border: .5px solid rgb(185, 184, 184);
+    opacity: .3;
+    margin: 0;
+    height: 100vh;
+}
+.chatFollower-Container{
+}
+.chatFollower-PlaceHolder{
+    width: 40vw;
+    background-color: white;
+
 }

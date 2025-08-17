@@ -135,26 +135,26 @@ async function handleUserSelect(){
 }
   return (
     <>
-    <Link to={`/meeps/${id}`}>
+    <Link to={`/meeps/${id}`} className="link-reset">
       <div className="meepfeed-Container">
 <div className="meepContent-Container" onClick={(e)=>{
   e.preventDefault()
   e.stopPropagation()
   handleUserSelect()}}>
     <div className="meepuseravatar">
-<Avatar 
-              size="md"
-              src={(currentUser && currentUser.avatarUrl) || ""}
-            ></Avatar>
- 
+
     </div>
  <div className="meepBody-Container">
           <div className="username-Container">
+ <Avatar 
+              size="lg"
+              src={(currentUser && currentUser.avatarUrl) || ""}
+            ></Avatar>
            
             {(!isLoading && currentUser) && <h4>{currentUser.name}</h4>}
-            {(!isLoading && currentUser) && <p>{`@${currentUser.username}`}</p>} 
+            <p className="meepCard-username">{`@${ currentUser && currentUser.username}`}</p>
          </div>
-          <p>{body}</p>
+          <p className="meepCard-body">{body}</p>
  
   </div>
  

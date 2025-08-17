@@ -30,6 +30,8 @@ export default function HomeUserFeed() {
     const content = data.usermeepfeed.map((usermeep: meep) => {
       return (
         <MeepCard
+
+        key={usermeep.id}
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
@@ -59,6 +61,8 @@ export default function HomeUserFeed() {
     const content = data.usermeeps.map((usermeep: meep) => {
       return (
         <MeepCard
+
+        key={usermeep.id}
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
@@ -111,6 +115,7 @@ export default function HomeUserFeed() {
     const content = data.likemeeps.map((usermeep: meep) => {
       return (
         <MeepCard
+        key={usermeep.id}
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
@@ -134,6 +139,7 @@ export default function HomeUserFeed() {
     <>
 <div className="userFeedSelector-Container">
     <div  className="feedSelectButton-Container">
+
       <button onClick={getFeed}>Your Feed</button>
 
       <button onClick={getUserLikes}>Your Likes</button>

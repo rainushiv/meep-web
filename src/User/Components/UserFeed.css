@@ -1,9 +1,7 @@
 
 .UserFeed-Container{
 
-    height: 400px;
 
-    margin-left:30px ;
 }
 .feedbutton-Container{
         display: flex;
@@ -27,8 +25,10 @@
     }
     .feedbutton-Container button:focus{
     
-      background-color:rgba(137, 137, 137, 0.297);
+text-decoration: underline;
+    text-decoration-color: #0b93f6;
+    text-underline-offset:13px ;
 
+    text-decoration-thickness:4px;
     
-        border: none;
     }

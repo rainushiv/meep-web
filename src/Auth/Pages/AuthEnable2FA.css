@@ -1,0 +1,81 @@
+.auth2fa-container {
+
+    margin-top: 80px;
+    max-width: fit-content;
+    margin-inline: auto;
+    background-color: rgb(30, 30, 30);
+    padding: 30px;
+    border-radius: 14px;
+    
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.auth2fa-container input {
+    background-color: rgb(255, 254, 254);
+    color: black;
+    width: 30%;
+ 
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    border-radius: 10px;
+    padding: 6px;
+
+   
+
+}
+.button-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 10px;
+
+}
+.authInput-Container{
+    display: flex;
+    justify-content: space-between;
+
+    margin-left:8%;
+    margin-right:8%;
+}
+.button-container {
+    margin-top: 8%;
+}
+.testButton-Container{
+    margin-left: 20%;
+    margin-top:10% ;
+}
+
+
+.avatar-Container{
+    border: solid 1px rgba(0, 0, 0, .2);
+    border-radius: 8px;
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+
+}
+.avatarInput-Container{
+
+    margin: auto;
+
+
+}
+.avatarInput-Container button{
+    margin-left: 49px;
+}
+.avatarInput-Container img{
+    height: 200px;
+    width: 200px; 
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    
+
+}
+.avatar-Title{
+
+    margin-left: 130px;
+}

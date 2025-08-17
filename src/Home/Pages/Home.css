@@ -23,10 +23,16 @@
 .title-Container {
     width: 100%;
 }
+.homeFeed-Divider{
 
 
-.homemeep-Container {
+    border: .5px solid rgba(185, 184, 184, 0.301);
+    width: 100%;
+}
+
+.homeMeep-Container {
     height: 100%;
+    width: 38vw;
     background-color: black;
     color: white;
    display: flex;
@@ -49,11 +55,29 @@ height: 1080px;
 }
 .divider{
 
-    border: 5px solid rgb(185, 184, 184);
+    border: .5px solid rgb(185, 184, 184);
     opacity: 1;
     z-index: -1;
+    margin: 0;
 }
 .sideBar-Placeholder{
-width: 800px;
+width: 2000px;
 height: 100%;
+}
+.chatButton-Container{
+
+    position: fixed;
+    bottom: 60px;
+    right:180px;
+}
+.chat-Button{
+    border: none;
+    background-color: rgb(29, 29, 29);
+    width: 180px;
+    height: 32px;
+    border-radius: 50px;
+    border:.1px solid rgba(118, 118, 118, 0.252) ;
+    font-weight: 800;
+    font-size: 18px;
+    cursor: pointer;
 }

@@ -10,13 +10,13 @@ import AttachmentIcon from "@mui/icons-material/Attachment";
 import CloseIcon from "@mui/icons-material/Close";
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 type props = {
-  Id: number;
+  id: number;
   isUser: boolean;
 };
 
-export default function UserCard({ Id, isUser }: props) {
+export default function UserCard({ id, isUser }: props) {
 
   const currentuserId = useStoreAuth((state) => state.Id);
   const [currentUser, setCurrentUser] = useState<any>();
@@ -33,6 +33,8 @@ const[isValid, setIsValid] = useState(false)
     null
   );
 
+  const Id = useStoreAuth((state) => state.Id);
+const navigate = useNavigate()
   useEffect(()=>{
 if(isOpenModal){
   document.body.style.overflow= "hidden"
@@ -47,7 +49,7 @@ else{
   useEffect(()=>{
     async function getFollowing(){
 
-const res = await fetch(`${APIURL}/api/users/followingcount/${Id}`)
+const res = await fetch(`${APIURL}/api/users/followingcount/${id}`)
 const data = await res.json()
 
 console.log(data.result)
@@ -55,25 +57,25 @@ console.log(data.result)
 setFollowingCount(data.result)
     }
     getFollowing()
-  },[Id])
+  },[id])
 
   useEffect(()=>{
 
     async function getFollowers(){
-const res = await fetch(`${APIURL}/api/users/followercount/${Id}`)
+const res = await fetch(`${APIURL}/api/users/followercount/${id}`)
 const data = await res.json()
 console.log(data.result)
 setFollowerCount(data.result)
 }
 getFollowers()
-  },[Id])
+  },[id])
 
 
 
   useEffect(()=>{
 
     async function checkfollowing() {
-      const res = await fetch(`${APIURL}/api/users/checkfollowing/${Id}`, {
+      const res = await fetch(`${APIURL}/api/users/checkfollowing/${id}`, {
         method:"POST",
         headers:{"Content-Type": "application/json"},
 
@@ -94,25 +96,26 @@ if(!isUser){
     checkfollowing();
 }
 
-  },[Id])
+  },[id])
   
 
   useEffect(() => {
     async function getCurrentUser() {
       setIsLoading(true);
-      const res = await fetch(`${APIURL}/api/users/${Id}/getcurrentuser`);
+      const res = await fetch(`${APIURL}/api/users/${id}/getcurrentuser`);
       const data = await res.json();
+      console.log(data.user[0])
       setCurrentUser(data.user[0]);
 
       setIsLoading(false);
     }
     getCurrentUser();
-  }, [Id]);
+  }, [id]);
 
   async function changeAvatar(){
     const formData = new FormData();
     formData.append("avatar",file!)
-    formData.append("id",Id.toString())
+    formData.append("id",id.toString())
     const res = await fetch(`${APIURL}/api/users/updateuseravatar`,{
       method:'POST',
         body: formData
@@ -125,7 +128,7 @@ if(!isUser){
 async function changeBanner(){
     const formData = new FormData();
     formData.append("banner",file!)
-    formData.append("id",Id.toString())
+    formData.append("id",id.toString())
     const res = await fetch(`${APIURL}/api/users/updateuserbanner`,{
       method:'POST',
         body: formData
@@ -173,6 +176,25 @@ async function changeBanner(){
   }, [file]);
 
 
+  async function followUserHandler() {
+    try {
+      console.log(Id, id);
+      const res = await fetch(`${APIURL}/api/users/follow/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          profileId: Id,
+        }),
+      });
+
+      console.log(res);
+      setIsFollowing(true);
+    } catch (err) {
+      console.log("error while following");
+    }
+  }
   return (
     <div className="profileUser-Container">
       <div className="userProfileContent-Container">
@@ -191,7 +213,7 @@ async function changeBanner(){
               <div className="userFollowers-Container">
                 <div className="userFollowers">
 
-                <Link to={`/userFollower/${Id}`}>
+                <Link className="link-reset" to={`/userFollower/${id}`}>
                 <p className="Followers-Text">{`Followers`}</p>
 
 </Link>
@@ -199,7 +221,7 @@ async function changeBanner(){
                 </div>
                 <div className="userFollowing">
 
-                <Link to={`/userFollowing/${Id}`}>
+                <Link to={`/userFollowing/${id}`} className="link-reset">
                 <p className="Following-Text" >{`Following`}</p>
 
 </Link>
@@ -216,8 +238,10 @@ async function changeBanner(){
                   pickImageHandler()
                  } } ><h3>Change Banner</h3></div>
                 
-                <hr className="horizontal-Divider"/>
+                <hr className="ProfileHorizontal-Divider"/>
                 <div className="changeAvatar-Container"onClick={pickImageHandler}><h3>Change Avatar</h3></div>
+                <hr className="ProfileHorizontal-Divider"/>
+                <div className="changeAvatar-Container"onClick={()=>navigate("/authEnable2fa")}><h3>Enable 2FA</h3></div>
               </div>}
 
                     <input
@@ -251,7 +275,6 @@ async function changeBanner(){
                   )}
                   <div className="meepbutton-Container">
                     <div className="sidebarActionButton-Container">
-                        
 
                     </div>
 
@@ -304,7 +327,7 @@ async function changeBanner(){
             )}
             {!isUser && (
               <div className="FollowButton-Container">
-                <Button>{isFollowing ? "Following" : "Follow"}</Button>
+                {isFollowing ? <Button>Following</Button>: <Button onClick={followUserHandler}>Follow</Button>}
               </div>
             )}
           </div>

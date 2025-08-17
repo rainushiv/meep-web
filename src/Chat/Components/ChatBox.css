@@ -1,10 +1,122 @@
 .chatbox-Container{
-width: 77%;
-height: 100vh;
-margin-left: 2.5vh;
-margin-top: 2.5vh;
-margin-right: 2.5vh;
-border-radius: 8px;
-background-color: white;
-color: black;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.chatContent-Container{
+    overflow: scroll;
+}
+.chatInput-Container {
+
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    padding: 0;
+    height: 5vh;
+    width: 68vw;
+  border-radius: 32px;
+  align-items: center;
+  justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.chatInput-Container input{
+
+    width: 62vw;
+
+  background-color: black;
+  border: none;
+  font-size: 15px;
+
+  
+}
+
+.chatInput-Container button{
+background-color: transparent;
+border: none;
+color:#0b93f6;
+font-weight: 610;
+font-size: 15px;
+
+}
+
+.chatInput-Container button:disabled{
+    color: gray;
+
+}
+.chatInput-Container button:hover{
+    cursor: pointer;
+}
+.message-Container{
+  
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+ul, li {
+  text-align: left;
+  list-style: none;
+}
+
+.itsykwim {
+max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 8px 18px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  background-color: #0b93f6;
+  text-align: center;
+  align-self: flex-end;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #0b93f6;
+  align-self: flex-end;
+}
+.received p {
+
+ background: rgb(37, 37, 37);
+  color: white;
+}
+.recipentUser-Container{
+    margin-left: 15px;
+display: flex;
+align-items: center;
+}
+
+.recipentUser-Container img{
+    object-fit: cover;
+    height: 50px;
+    width: 55px;
+    border-radius: 80px;
+
+}
+.chathr-Divider{
+        border: .5px solid rgb(185, 184, 184);
+    opacity: .3;
+    margin: 0;
+    width: 100vw;
+    overflow: hidden;
+}
+.recipentUser-Content {
+    display: flex;
+
+    gap: 15px;
+    align-items: center;
+
+}
+.link-reset{
+    text-decoration: none;
+    color: inherit;
 }

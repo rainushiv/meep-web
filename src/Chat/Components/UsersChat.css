@@ -1,9 +1,52 @@
-.user-Container{
-width: 22%;
-height: 100vh;
-margin-left: 20px;
-margin-top: 20px;
-border-radius: 8px;
-background-color: white;
-color: black;
+
+.chatUserCard-Container {
+  padding-top:1rem;
+  padding-bottom:1rem;
+  padding-right:11.8rem;
+  padding-left:2.9rem;
+  border-radius: 8px;
+
+}
+.chatUserCard-Container:hover {
+  background-color: rgb(37, 37, 37);
+  transition: 0.3s;
+}
+
+.chatUserCard-Container.focus {
+
+  background-color: rgb(37, 37, 37);
+  transition: 0.3s;
+
+}
+
+
+.chatUserCardContent-Container {
+  display: flex;
+  justify-content: space-between;
+}
+.chatUserInfo-Container {
+  display: flex;
+  gap: 20%;
+}
+.cardinfo-Container a {
+  text-decoration: none;
+}
+.testing-something p {
+
+  color: white;
+  list-style: none;
+
+  text-decoration: none;
+}
+.testing-something{
+  text-decoration: none;
+  
+}
+
+.follow-Button{
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 136, 255);
+  font-size:15px;
+  font-weight: 500; 
 }

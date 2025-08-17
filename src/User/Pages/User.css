@@ -1,0 +1,18 @@
+.profileBackButton-Container{
+
+position: fixed;
+width: 38vw;
+height: 46px;
+top: 0;
+
+
+  backdrop-filter: blur(10px);  
+  z-index: 1;
+  padding-top:14px ;
+}
+
+.profileBackButton-Container h4{
+    margin: 0;
+    margin-left: 14px;
+    font-size: 20px;
+}

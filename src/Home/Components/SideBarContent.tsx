@@ -147,6 +147,10 @@ else{
 
             <li>Notifications</li>
 </Link>
+<Link className="navbarLink" to={"/chat/inbox"}>
+
+            <li>Messages</li>
+</Link>
 <Link className="navbarLink" to={"/profile"}>
 <li>Profile</li>
 </Link>

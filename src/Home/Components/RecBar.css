@@ -1,12 +1,20 @@
 
 .recBar-Container{
 width: 46vh;
-max-height: 60%;
+min-height: 60% ;
+height: 60%;
+position: fixed;
 background-color: black;
 color: white;
-overflow: scroll;
 top:20px;
 right: 80px;
+margin-left: 55px;
+}
+.recBar-Content{
+
+height: 100%;
+min-height: 60% ;
+overflow: scroll;
 }
 .recBar-Container h3{
     padding-top: 20px;

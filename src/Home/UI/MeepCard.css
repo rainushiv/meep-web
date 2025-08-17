@@ -1,39 +1,38 @@
 
-.meepfeed-Container{
-
-    margin-top: 10px;
-
-}
 .userinfo-Container{
     display: flex;
     justify-content: space-between;
 
 }
 .username-Container{
-    margin-top:8px ;
     display: inline-flex;
-    gap: 8px;
     align-items: center;
     color: white;
+    margin: 0;
 
+}
+.meepCard-username{
+    margin: 0;
 }
 
 .username-Container p {
 color: lightgray;
 font-size: 12px;
+margin-left: 0;
+}
+
+.username-Container h4 {
+    margin: 0;
+    margin-left: 10px;
 }
 .meepcontent-Container{
-    margin-left: 52px;
 
 }
 .meepImages-Container{
 display: flex;
-    align-self: center;
-justify-self: center;
-margin-bottom: 20px;
+margin-left: 80px;
 }
 .meepImage{
-    margin-top:20px ;
     height: 550px;
 
     width: 450px;
@@ -50,19 +49,26 @@ border-radius: 20px;
 }
 .meepContent-Container{
     display: flex;
+    align-items: center;
 }
 .meepBody-Container{
-    margin-left:10px ;
+    margin-left:12px ;
     
 }
 
 .meepBody-Container p {
-    margin-top: 2px;
 color: white;
+text-decoration: none;
+
+}
+.meepCard-body {
+    margin: 0;
+    margin-bottom: 11px;
+
+    margin-left: 72px;
 }
 .meepuseravatar {
     margin-top: 10px;
-    margin-left:100px ;
 }
 .likeCount {
     color: gray;

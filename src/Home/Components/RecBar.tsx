@@ -18,7 +18,11 @@ return (
 <h3>Reccommended</h3>
 
         <Divider></Divider>
+
+        <div className="recBar-Content">
+
 {content}
+        </div>
     </div>
 );
 }

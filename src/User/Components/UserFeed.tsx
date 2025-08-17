@@ -84,7 +84,8 @@ export default function UserFeed({Id}:props) {
   }
 
   async function getUserLikes() {
-    const response = await fetch(`${APIURL}api/usermeeps/getlikedmeeps/${Id}`);
+    setIsLoading(true)
+    const response = await fetch(`${APIURL}/api/usermeeps/getlikedmeeps/${Id}`);
     const data = await response.json();
     const content = data.likemeeps.map((usermeep: meep) => {
       return (
@@ -92,12 +93,13 @@ export default function UserFeed({Id}:props) {
           id={usermeep.id}
           body={usermeep.body}
           creatorId={usermeep.creatorId}
-          imageUrl={null}
+          imageUrl={usermeep.imageUrl}
           userMeep={false}
         ></MeepCard>
       );
     });
     setContent(content);
+    setIsLoading(false)
  
   }
   return (
@@ -106,7 +108,7 @@ export default function UserFeed({Id}:props) {
         <button autoFocus onClick={getUserMeeps}> meeps</button>
         <button onClick={getUserLikes}>Likes</button>
       </div>
-<hr className="horizontal-Divider"></hr>
+<hr className="userHorizontal-Divider"></hr>
       <div className="UserFeed-Container">{!isLoading && content}</div>
     </>
   );

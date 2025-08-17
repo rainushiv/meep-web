@@ -36,6 +36,7 @@ type users = {
 export default function OtherUser() {
  const [userData, setUserData] = useState<any>(null);
   const [users, setUser] = useState<any>(null);
+  const [isFollowing, setIsFollowing] = useState<Boolean>(false);
   const [meeps, setMeeps] = useState();
   const Id = useStoreAuth((state) => state.Id);
 
@@ -73,6 +74,31 @@ export default function OtherUser() {
   const { ref, inView } = useInView();
 
   useEffect(() => {
+    async function getIfFollowing() {
+
+      const res = await fetch(`${APIURL}/api/users/checkfollowing/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          profileId: Id,
+        }),
+      });
+      const data = await res.json();
+
+      const follower = data.following[0];
+      if (follower === undefined || follower.length === 0) {
+        setIsFollowing(false);
+      } else if (follower !== 0) {
+        setIsFollowing(true);
+      }
+    }
+    getIfFollowing();
+  },[]);
+
+
+  useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
@@ -88,6 +114,8 @@ console.log(data)
 
     }
  },[userid])
+  
+
 
 
 
@@ -120,7 +148,7 @@ console.log(data)
             </div>
          </div>
  
-           <UserCard Id={userId} isUser={false}></UserCard>
+           <UserCard id={userId} isUser={false}></UserCard>
             <UserFeed Id={userId}></UserFeed>
 
       </div>

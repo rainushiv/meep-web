@@ -8,7 +8,7 @@ type StoreAuth = {
     Token:string
     Email: string,
     Password: string,
-    Login: (id: number, token: string) => void;
+    Login: (id: number,username:string) => void;
     Logout: () => void;
     setEmail: (email: string) => void;
     setId: (id: number) => void;
@@ -27,7 +27,7 @@ export const useStoreAuth = create<StoreAuth>((set) => ({
     Email: '',
     Password: '',
 
-    Login: (id,token) => { set({ isLogin: true }), set({ Id: id,Token:token }) },
+    Login: (id,username) => { set({ isLogin: true }), set({ Id: id }),set({Username:username}) },
     Logout: () => { set({ isLogin: false, Id:null,Token:'' }) },
     setId: (id) => { set({ Id: id }) },
     setName: (name) => { set({ Name: name }) },

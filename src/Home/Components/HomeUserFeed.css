@@ -2,18 +2,22 @@
 .homeUserFeed-Container{
 
     height: 80%;
-    width: 46vw;
 }
 .horizontal-Divider{
 
     border: .5px solid rgb(185, 184, 184);
     z-index: -1;
     opacity: .3;
+    align-self: flex-start;
+    width: 38vw;
+
+    margin: 0;
 }
 .userFeedSelector-Container{
  position: fixed;
     top: 0px;
-    width: 46vw;
+    width: 38vw;
+    height: 40px;
     z-index: 1;
   backdrop-filter: blur(10px);  
 }
@@ -27,11 +31,18 @@
     font-size: 17px;
     width: 100%;
 
-    height: 40px;
+    height: 50px;
     border: none;
     background-color: transparent;
 }
 
 .feedSelectButton-Container button:hover{
 background-color: rgba(158, 157, 157, 0.224);
+}
+.feedSelectButton-Container button:focus{
+    text-decoration: underline;
+    text-decoration-color: #0b93f6;
+    text-underline-offset:13px ;
+
+    text-decoration-thickness:4px;
 }

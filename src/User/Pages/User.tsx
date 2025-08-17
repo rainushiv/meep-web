@@ -12,6 +12,7 @@ import UserFeed from "../Components/UserFeed"
 import { useNavigate } from "react-router-dom"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from "@mui/joy/IconButton";
+import "./User.css"
 
 type user = {
   id: number;
@@ -30,6 +31,7 @@ type users = {
 
 export default function User() {
     const Id = useStoreAuth((state) => state.Id)
+    const Username = useStoreAuth((state) => state.Username)
 
   const navigate = useNavigate();
 
@@ -71,10 +73,11 @@ return (
         <div className="sideBar-Placeholder">
 
         </div>
+
         <hr className="divider"></hr>
 
-        <div className="homemeep-Container">
-<div className="backButton-Container">
+        <div className="homeMeep-Container">
+<div className="profileBackButton-Container">
             <div className="flexBackButton-Container" onClick={()=>navigate(-1)}>
             <IconButton sx={[
                   {
@@ -86,11 +89,11 @@ return (
                 ]}>
       <ArrowBackIosIcon className="goBack-Button"></ArrowBackIosIcon>
             </IconButton>
-           <h3>back</h3> 
+           <h4>{Username}</h4> 
  
             </div>
          </div>
-            <UserCard Id={Id!} isUser={true}></UserCard>
+            <UserCard id={Id!} isUser={true}></UserCard>
             <hr className="horizontal-Divider"></hr>
             <UserFeed Id={Id!}></UserFeed>
         </div>
