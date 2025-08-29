@@ -1,6 +1,10 @@
 name: CI/CD for meep frontend
 
 on:
+  push:
+    branches:
+      - main
+
 jobs:
 
 
