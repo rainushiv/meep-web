@@ -10,6 +10,7 @@ top: 24px;
 left: 90px;
 }
 
+
 .sideBar-Content h1{
     font-size: 30px;
 }
@@ -87,8 +88,8 @@ color: white;
     padding-left: 20px;
     padding-right: 20px;
     position: fixed;
-    top: 250px;
-    left: 450px;
+    top: 200px;
+    left: 420px;
     
 }
 

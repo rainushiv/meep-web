@@ -110,11 +110,13 @@ console.log(data)
         </div>
  
         <hr className="divider"></hr>
-        <div>
-
+        
           <RecBar content={content}></RecBar>
+        <div className="RecBar-PlaceHolder">
 
         </div>
+
+
 <div className="chatButton-Container">
 
           <Link to={`/chat/inbox`}><button className="chat-Button">Messages</button></Link>

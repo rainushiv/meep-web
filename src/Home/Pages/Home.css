@@ -48,6 +48,13 @@
     width: 300px;
     height: 30px;
 }
+.RecBar-PlaceHolder{
+
+width: 40vh;
+min-height: 60% ;
+height: 60%;
+margin-left: 55px;
+}
 .AllContent-Container{
 
 display: flex;

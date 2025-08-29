@@ -52,17 +52,16 @@ else{
   const meepSubmitHandler = async () => {
     if (!file)
       try {
+
+            const formData = new FormData()
+            formData.append("body",value)
+            formData.append("creatorId",Id!.toString())
         const res = await fetch(`${APIURL}/api/usermeeps/createimgmeep`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             "Authorization":"Bearer "+Token
           },
-          body: JSON.stringify({
-            title: null,
-            body: value,
-            creatorId: Id,
-          }),
+          body: formData,
         });
 
         setValue("");
