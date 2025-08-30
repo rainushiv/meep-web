@@ -1,4 +1,4 @@
-FROM oven/bun:latest
+FROM oven/bun:latest AS builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,7 +15,7 @@ FROM caddy:2-alpine
 
 COPY Caddyfile /etc/caddy/Caddyfile
 
-COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+COPY --from=builder /app/dist /user/share/caddy
 
 EXPOSE 80
 
