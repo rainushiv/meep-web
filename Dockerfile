@@ -9,7 +9,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Run the server when the container launches
-CMD ["bun", "run", "build"]
+RUN bun run build
 
 FROM caddy:2-alpine
 
