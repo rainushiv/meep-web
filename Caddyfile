@@ -1,5 +1,9 @@
 :80 {
   encode zstd gzip
+  
+  @api path /api/*
+  reverse_proxy @api api:4000   # <— 'api' is the Compose service name
+
   root * /usr/share/caddy
   try_files {path} /index.html
   file_server
