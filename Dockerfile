@@ -9,7 +9,7 @@ COPY . .
 RUN bun install
 
 # Run the server when the container launches
-CMD ["bun", "run", "dev","--host"]
+CMD ["bun", "run", "build"]
 
 FROM caddy:2-alpine
 
