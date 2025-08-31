@@ -15,7 +15,7 @@ FROM caddy:2-alpine
 
 COPY Caddyfile /etc/caddy/Caddyfile
 
-COPY --from=builder /app/dist /user/share/caddy
+COPY --from=builder /app/dist /usr/share/caddy
 
 EXPOSE 80
 
