@@ -56,7 +56,7 @@ export default function AuthContent() {
       }
     } else if (loginMode) {
       try {
-        const res = await fetch(`/api/users/login`, {
+        const res = await fetch(`${APIURL}/api/users/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function AuthContent() {
 
   const handleTestSignIn = async () => {
     try {
-      const res = await fetch(`/api/users/login`, {
+      const res = await fetch(`${APIURL}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

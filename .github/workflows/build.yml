@@ -30,4 +30,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/rainushiv/meep-web:${{ env.SHORT_SHA }}
-            ghcr.io/rainushiv/meep-web:${{ github.sha }}
+            ghcr.io/rainushiv/meep-web:latest
