@@ -1,4 +1,4 @@
-FROM oven/bun:latest
+FROM oven/bun:latest AS build 
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN bun install
 # Expose the port on which the API will listen
 
 # Run the server when the container launches
-CMD ["bun", "run", "build"]
+RUN bun run build
 
 FROM caddy:2-alpine
 
