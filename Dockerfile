@@ -1,13 +1,16 @@
-FROM oven/bun:latest AS builder
+FROM oven/bun:latest
 
+# Set the working directory in the container
 WORKDIR /app
 
-COPY package.json bun.lockb* ./
-
-RUN bun install --frozen-lockfile
-
+# Copy the current directory contents into the container at /app
 COPY . .
 
+RUN bun install
+
+# Expose the port on which the API will listen
+EXPOSE 5173
+
 # Run the server when the container launches
-RUN bun run build
+CMD ["bun", "run", "dev","--host"]
 
