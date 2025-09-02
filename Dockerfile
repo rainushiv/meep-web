@@ -8,7 +8,6 @@ COPY . .
 
 RUN bun install
 
-
 # Run the server when the container launches
-RUN bun run build
+CMD ["bun", "run", "build"]
 
