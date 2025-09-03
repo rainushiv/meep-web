@@ -41,7 +41,7 @@ export default function AuthContent() {
         formData.append("username", username);
         formData.append("email", email);
         formData.append("password", password);
-        const res = await fetch(`${APIURL}/api/users/createuser`, {
+        const res = await fetch(`/api/users/createuser`, {
           method: "POST",
           body: formData,
         });
@@ -56,7 +56,7 @@ export default function AuthContent() {
       }
     } else if (loginMode) {
       try {
-        const res = await fetch(`${APIURL}/api/users/login`, {
+        const res = await fetch(`/api/users/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
