@@ -1,11 +1,13 @@
 name: CI/CD for meep frontend
 
 on:
+ push:
+    branches: [ main ]
 jobs:
 
 
   deploy:
-
+    needs: build
 
 
     runs-on: ubuntu-latest 
@@ -19,11 +21,5 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /var/www/meep-site/meep-web
-            rm -rf dist/
-            bun run build
-            git pull 
-            cd ..
-            cd meep-infra
-            docker-compose build --no-cache
-            docker compose up --build 
+            cd /var/www/meep-site/meep-infra
+            docker compose up -d

@@ -73,3 +73,7 @@ text-decoration: none;
 .likeCount {
     color: gray;
 }
+.avatar{
+    background-color: white;
+    padding-left: 100px;
+}
