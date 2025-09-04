@@ -1,8 +1,10 @@
 name: CI/CD for meep frontend
 
 on:
- push:
-    branches: [ main ]
+  workflow_run:
+    workflows: ["build-and-push-web"]
+    types: [completed]
+    branches: [main]
 jobs:
 
 
