@@ -14,7 +14,7 @@ import AuthVerify from "./Auth/Pages/AuthVerify";
 import AuthEnable2FA from "./Auth/Pages/AuthEnable2FA";
 
 function App() {
-
+  console.log("etst")
   const isLogin = useStoreAuth((state) => state.isLogin);
   let route;
   if (isLogin) {
