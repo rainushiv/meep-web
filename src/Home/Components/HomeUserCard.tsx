@@ -27,7 +27,7 @@ export default function HomeUserCard({ id, name, username, avatarUrl }: user) {
   const [isFollowing, setIsFollowing] = useState<Boolean>(false);
   const Token = useStoreAuth((state) => state.Token)
   const Id = useStoreAuth((state) => state.Id);
-
+  console.log("test")
   useEffect(() => {
     async function getIfFollowing() {
 
