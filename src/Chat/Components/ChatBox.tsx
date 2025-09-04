@@ -69,7 +69,7 @@ export default function ChatBox() {
     if (!topic){
       return
     }
-    socket.current = new WebSocket("ws://localhost:3001/chat?topic=" + topic);
+    socket.current = new WebSocket("/chat?topic=" + topic);
 
     socket.current.onopen = (event) => {
 
