@@ -10,7 +10,7 @@ scalable data handling.
  [Live Site](https://shivalry.dev)  
 
 > **Note:** The live demo does not include Elasticsearch because the container is too resource-intensive for the Hetzner server.
-If you’d like to see it in action, check out the demo video below.Also, I did not focus too much on the frontend so if your screen is considerably larger or smaller the UI will not look correct.
+If you’d like to see it in action, check out the demo video below. Also, I did not focus too much on the frontend so if your screen is considerably larger or smaller the UI will not look correct.
 
 ---
 
