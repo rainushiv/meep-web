@@ -17,7 +17,7 @@ If you’d like to see it in action, check out the demo video below.
 ##  Live video (Elasticsearch/websocket)
 
 The reason you don't see avatars in the searchbar is due to there being 10k+ users in the databse and all the images are stored in an s3 bucket. s3 only allows for 2k put requests
-before they begin charging so i opted out of putting avatars for the 10k users.
+before they begin charging so i opted out of putting avatars for the 10k users. Also, I did not focus too much on the frontend so if your screen is considerably larger or smaller the UI will not look correct.
 
 
 [Websocket](https://github.com/user-attachments/assets/bebd9b64-8822-49a9-8db1-88575889fb06)
