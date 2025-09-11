@@ -4,7 +4,7 @@ import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import Avatar from "@mui/joy/Avatar";
 import { da } from "zod/v4/locales";
 import { Link, useParams } from "react-router-dom";
-import { APIURL } from "../../App";
+import { APIURL, CHATURL } from "../../App";
 
 type message =   {
   userId: number;
@@ -69,7 +69,7 @@ export default function ChatBox() {
     if (!topic){
       return
     }
-    socket.current = new WebSocket("/chat?topic=" + topic);
+    socket.current = new WebSocket(`${CHATURL}/chat?topic=` + topic);
 
     socket.current.onopen = (event) => {
 

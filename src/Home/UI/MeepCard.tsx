@@ -146,7 +146,7 @@ async function handleUserSelect(){
     </div>
  <div className="meepBody-Container">
           <div className="username-Container">
- <Avatar 
+ <Avatar  
               size="lg"
               src={(currentUser && currentUser.avatarUrl) || ""}
             ></Avatar>

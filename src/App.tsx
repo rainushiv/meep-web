@@ -57,3 +57,4 @@ function App() {
 
 export default App;
 export const APIURL = import.meta.env.VITE_API_URL || ""
+export const CHATURL = import.meta.env.VITE_CHAT_URL || ""

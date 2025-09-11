@@ -22,4 +22,5 @@ jobs:
           port: 22
           script: |
             cd /var/www/meep-site/meep-infra
+            docker compose down 
             docker compose up -d
