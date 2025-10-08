@@ -205,7 +205,7 @@ if(userId){
           method: "POST",
           body: formData,
           headers: {
-            Authorization: "Bearer " + Token,
+            //Authorization: "Bearer " + Token,
           },
         });
 
@@ -227,7 +227,7 @@ if(userId){
           method: "POST",
           body: formData,
           headers: {
-            Authorization: "Bearer " + Token,
+            //Authorization: "Bearer " + Token,
           },
         });
 
