@@ -2,6 +2,7 @@ import Button from "@mui/joy/Button/Button";
 import { useState, useEffect } from "react";
 import { useStoreAuth } from "../../Auth/Components/AuthStore";
 import "./FollowButton.css"
+import { APIURL } from "../../App";
 type followingInfo = {
 
     currentId: string | number | null,
@@ -20,7 +21,7 @@ export default function FollowButton({ currentId }: followingInfo) {
 
         async function getIfFollowing() {
 
-            const res = await fetch(`http://localhost:5173/api/users/checkfollowing/${currentId}`, {
+            const res = await fetch(`${APIURL}/api/users/checkfollowing/${currentId}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +47,7 @@ export default function FollowButton({ currentId }: followingInfo) {
 
         try {
 
-            const res = await fetch(`http://localhost:5173/api/users/follow/${currentId}`, {
+            const res = await fetch(`${APIURL}/api/users/follow/${currentId}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

@@ -28,7 +28,7 @@ export default function UserMeeps(
   useEffect(() => {
     async function checkLike() {
       const res = await fetch(
-        `http://localhost:5173/api/usermeeps/checklike/${id}`,
+        `${APIURL}/api/usermeeps/checklike/${id}`,
         {
           method: "POST",
           headers: {

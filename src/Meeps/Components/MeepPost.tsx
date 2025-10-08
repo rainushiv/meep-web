@@ -205,7 +205,7 @@ if(userId){
           method: "POST",
           body: formData,
           headers: {
-            //Authorization: "Bearer " + Token,
+            Authorization: "Bearer " + Token,
           },
         });
 
@@ -227,7 +227,7 @@ if(userId){
           method: "POST",
           body: formData,
           headers: {
-            //Authorization: "Bearer " + Token,
+            Authorization: "Bearer " + Token,
           },
         });
 
@@ -243,7 +243,7 @@ if(userId){
 useEffect(()=>{
         async function getComment(){
 
-const result = await fetch(`http://localhost:3000/api/usermeeps/getmeepcomments/${uid.uid}`)
+const result = await fetch(`${APIURL}/api/usermeeps/getmeepcomments/${uid.uid}`)
 const data = await result.json()
 setMeepComments(data)
         }

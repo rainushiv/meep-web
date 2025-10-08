@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import './FollowCard.css'
 import Avatar from "@mui/joy/Avatar/Avatar";
+import { APIURL } from "../../App";
 
 type id = {
     id: number;
@@ -19,7 +20,7 @@ export default function FollowCard({ id }: id, { followtype }: followtype) {
         async function getCurrentFollower() {
 
 
-            const res = await fetch(`http://localhost:5173/api/users/${id}/getcurrentuser`);
+            const res = await fetch(`${APIURL}/api/users/${id}/getcurrentuser`);
             const data = await res.json()
 
             setCurrentUser(data.user[0]);
