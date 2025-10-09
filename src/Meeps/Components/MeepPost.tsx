@@ -54,10 +54,10 @@ const [isLiked, setIsLiked] = useState(false)
         `${APIURL}/api/usermeeps/getmeep/${uid.uid}`
       );
       const data = await result.json();
-      console.log(data)
       setMeep(data.usermeeps[0]);
-
       setIsLoading(false);
+
+      console.log(meep)
     }
     getmeep();
   }, []);
@@ -257,7 +257,6 @@ setMeepComments(data)
     )
 },[meep])
 
-
   return (
 
     <div className="meepPostPage-Container">
@@ -285,7 +284,8 @@ setMeepComments(data)
 
         {!isLoading && meep ? (
           <div className="meepPostImage-Container">
-            <img className="meepPostImage" src={meep.imageUrl}></img>
+            
+            {meep.imageText !== "N/A" && <img className="meepPostImage" src={meep.imageUrl || null}></img>}
           </div>
         ) : (
           <div>

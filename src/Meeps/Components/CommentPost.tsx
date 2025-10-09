@@ -27,7 +27,7 @@ const [meepCommentLikeCount,setMeepCommentLikeCount] = useState(0)
   const Id = useStoreAuth((state) => state.Id);
  useEffect(()=>{
   async function checkCommentLike(){
-const result = await fetch(`${APIURL}/api/usermeeps/checklikecomment/${id}`,{
+const result = await fetch(`${APIURL}/api/usermeeps/checklikecomment/${Id}`,{
   method:"POST",
   headers:{"Content-Type": "application/json"},
   body: JSON.stringify({userId: Id})
