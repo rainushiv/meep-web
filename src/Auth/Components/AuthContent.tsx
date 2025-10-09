@@ -219,6 +219,7 @@ export default function AuthContent() {
           </label>
           <input
             value={password}
+            type="password"
             id="password"
             placeholder="Password"
             onChange={(e) => {
