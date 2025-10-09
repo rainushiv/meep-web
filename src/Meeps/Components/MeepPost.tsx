@@ -47,16 +47,15 @@ const [isLiked, setIsLiked] = useState(false)
   const Id = useStoreAuth((state) => state.Id);
   const Token = useStoreAuth((state) => state.Token);
   const userId = useStoreAuth((state) => state.Id);
-  console.log(uid.uid);
   useEffect(() => {
     async function getmeep() {
       setIsLoading(true);
       const result = await fetch(
-        `${APIURL}/api/usermeeps/getusermeep/${uid.uid}`
+        `${APIURL}/api/usermeeps/getmeep/${uid.uid}`
       );
       const data = await result.json();
-
-      setMeep(data.meep[0]);
+      console.log(data)
+      setMeep(data.usermeeps[0]);
 
       setIsLoading(false);
     }
@@ -263,7 +262,7 @@ setMeepComments(data)
 
     <div className="meepPostPage-Container">
       <div className="meepfeed-Container">
-        <div className="meepContent-Container">
+        <div className="meepPostContent-Container">
 
           {meepUser && !isLoading ? (
             <Avatar size="md" src={meepUser.avatarUrl}></Avatar>
@@ -275,13 +274,18 @@ setMeepComments(data)
               {meepUser && <h4>{meepUser.name}</h4>}
               {meepUser && <p>{`@${meepUser.username}`}</p>}
             </div>
-            {!isLoading && meep && <p>{meep.body} </p>}
-          </div>
+
         </div>
 
+          </div>
+          <div className="meepPostBody-Container">
+
+            {!isLoading && meep && <p>{meep.body} </p>}
+          </div>
+
         {!isLoading && meep ? (
-          <div className="meepImages-Container">
-            <img className="meepImage" src={meep.imageUrl}></img>
+          <div className="meepPostImage-Container">
+            <img className="meepPostImage" src={meep.imageUrl}></img>
           </div>
         ) : (
           <div>
@@ -399,7 +403,7 @@ setMeepComments(data)
                  Reply 
                 </button>
               </div>
-
+<hr className="horizontal-Divider"></hr>
             </div>
 
           </div>

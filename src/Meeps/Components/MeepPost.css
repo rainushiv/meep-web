@@ -1,11 +1,10 @@
 .meepPostPage-Container{
 
     height: 80%;
-    width: 86vw;
+    width: 34vw;
     display: flex;
     margin-top: 60px;
     overflow: hidden;
-    margin-left: 120px;
 }
 .horizontal-divider{
 
@@ -26,7 +25,8 @@ justify-content: space-evenly;
 }
 .meepPostComment-Container{
     display: flex;
-    margin-top:20px ;
+    margin-top:20px;
+    margin-left:23px ;
 }
 .meepPostComment-Container textarea {
 
@@ -47,5 +47,25 @@ color: white;
 .meepPostComment-Container textarea:focus{
 
 border: none;
+}
+.meepPostImage-Container{
+display: flex;
+justify-content: center;
+
+}
+.meepPostImage{
+    height: 450px;
+    width: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.meepPostContent-Container{
+    padding-top:20px ;
+    padding-left:23px ;
+    display:flex;
+    align-items: center;
+}
+.meepPostBody-Container{
+    padding-left:83px ;
 }
 

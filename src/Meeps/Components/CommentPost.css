@@ -44,6 +44,7 @@ border-radius: 20px;
 }
 .meepCommentContent-Container{
     display: flex;
+    margin-left:23px ;
 }
 .meepCommentBody-Container{
     margin-left:8px ;
