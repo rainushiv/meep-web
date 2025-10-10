@@ -375,7 +375,7 @@ setMeepComments(data)
                   <img src={previewUrl} className="meepImg-Container"></img>
                 </div>
               )}
-              <div className="meepAction-Container">
+              <div className="meepCommentButtons-Container">
                 <div className="attachmentButton-Container">
                   <IconButton
                     className="attachment-Container"

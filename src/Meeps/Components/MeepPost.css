@@ -6,6 +6,10 @@
     margin-top: 60px;
     overflow: hidden;
 }
+.meepCommentButtons-Container{
+    display: flex;
+    gap: 280px;
+}
 .horizontal-divider{
 
     border: .5px solid rgb(185, 184, 184);
@@ -27,11 +31,13 @@ justify-content: space-evenly;
     display: flex;
     margin-top:20px;
     margin-left:23px ;
+    width: 34vw;
+    padding: 0;
 }
 .meepPostComment-Container textarea {
 
     height: 30%;
-    width: 27vw;
+    width: 28vw;
     
 
 background-color: transparent;
