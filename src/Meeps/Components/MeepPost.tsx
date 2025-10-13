@@ -247,7 +247,7 @@ const data = await result.json()
 setMeepComments(data)
         }
         getComment();  
-    },[meep])
+    },[meep, subject])
 
  const content = meepComments?.comments.map((comment)=>{
     return(
