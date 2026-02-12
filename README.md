@@ -2,7 +2,7 @@
 
 Developed a lightweight, self-hosted social media platform with React.js front-end and a Hono + Bun backend,featuring real-time chat, advanced search, and secure deployment. Designed for responsive user interaction and scalable data handling.
 
-**Architecture and Design:**  [View system design and  tradeoffs] https://github.com/rainushiv/meep-web/wiki
+**Architecture and Design:**  [View system design and  tradeoffs](https://github.com/rainushiv/meep-web/wiki)
 
 ---
 
