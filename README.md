@@ -1,8 +1,12 @@
 # Meep Social Media
 
 Developed a lightweight, self-hosted social media platform with React.js front-end and a Hono + Bun backend,featuring real-time chat, advanced search, and secure deployment. Designed for responsive user interaction and scalable data handling.
+
+**Architecture and Design:**  [View system design and  tradeoffs] https://github.com/rainushiv/meep-web/wiki
+
 ---
-**Architecture and Design:** https://github.com/rainushiv/meep-web/wiki
+
+
 
 ##  Live Demo
  [Live Site](https://shivalry.dev)  
@@ -14,7 +18,7 @@ If you’d like to see it in action, check out the demo video below. Also, I did
 
 ##  Live video (Elasticsearch/websocket)
 
-The reason you don't see avatars in the searchbar is due to there being 10k+ users in the databse and all the images are stored in an s3 bucket. s3 only allows for 2k put requests
+The reason you don't see avatars in the searchbar is due to there being 10k+ users in the databse and all the images are stored in an s3 bucket. S3 only allows for 2k put requests
 before they begin charging so i opted out of putting avatars for the 10k users. 
 
 
